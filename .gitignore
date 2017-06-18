@@ -15,3 +15,10 @@
 #System Files
 .DS_Store
 Thumbs.db
+
+/*.log
+/target
+/*-init.clj
+/resources/public/js
+out
+/figwheel_server.log
