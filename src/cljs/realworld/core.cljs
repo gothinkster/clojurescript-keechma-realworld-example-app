@@ -1,68 +1,15 @@
 (ns realworld.core
-  (:require-macros
-   [reagent.ratom :refer [reaction]])
-  (:require
-   [reagent.core :as reagent]
-   [keechma.ui-component :as ui]
-   [keechma.controller :as controller]
-   [keechma.app-state :as app-state]))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Controllers
-
-(defrecord Counter []
-  controller/IController
-
-  (params [_ _] true)
-
-  (start [_ params app-db]
-    (assoc-in app-db [:count] 0))
-
-  (handler [_ app-db-atom in-chan _]
-    (controller/dispatcher
-     app-db-atom
-     in-chan
-     {:dec #(swap! app-db-atom update-in [:count] dec)
-      :inc #(swap! app-db-atom update-in [:count] inc)})))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Subs
-
-(defn counter-value-sub [app-db]
-  (reaction
-   (get-in @app-db [:count])))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Components
-
-(defn counter-render [app-db]
-  (let [counter-sub (ui/subscription app-db :counter-value)]
-    (fn []
-      [:div
-       [:button {:on-click #(ui/send-command app-db :dec)} "Decrement"]
-       [:button {:on-click #(ui/send-command app-db :inc)} "Increment"]
-       [:p (str "Count: " @counter-sub)]])))
-
-(def counter-component
-  (ui/constructor
-   {:renderer          counter-render
-    :subscription-deps [:counter-value]}))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Initialize App
+  (:require [reagent.core :as reagent]
+            [keechma.app-state :as app-state]
+            [realworld.controllers :refer [controllers]]
+            [realworld.ui :refer [ui]]))
 
 (def app-definition
-  {:components    {:main (assoc counter-component :topic :Counter)}
-   :controllers   {:Counter (->Counter)}
-   :subscriptions {:counter-value counter-value-sub}
+  {:components    ui
+   :controllers   controllers 
+   :subscriptions {}
+   :routes [["" {:page "home"}]
+            ":page"]
    :html-element  (.getElementById js/document "app")})
 
 (defonce running-app (clojure.core/atom))

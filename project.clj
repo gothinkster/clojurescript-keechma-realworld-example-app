@@ -1,5 +1,5 @@
 (defproject realworld "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
                  [org.clojure/clojurescript "1.9.229"]
                  [reagent "0.6.1"]
                  [keechma "0.2.0-SNAPSHOT-12" :exclusions [cljsjs/react-with-addons]]
