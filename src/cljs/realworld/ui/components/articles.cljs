@@ -30,7 +30,7 @@
 (defn render-pagination [ctx]
   (let [articles-meta (sub> ctx :articles-meta)
         current-route (route> ctx)
-        current-page (js/parseInt (or (:list-page current-route) "1") 10)
+        current-page (js/parseInt (or (:p current-route) "1") 10)
         page-count (.ceil js/Math (/ (get-in articles-meta [:meta :count]) articles-per-page))]
     (when (< 1 page-count)
       [:nav>ul.pagination
@@ -38,7 +38,7 @@
                      [:li.page-item
                       {:key p
                        :class (class-names {:active (= p current-page)})}
-                      [:a.page-link {:href (ui/url ctx (assoc current-route :list-page p))} p]])
+                      [:a.page-link {:href (ui/url ctx (assoc current-route :p p))} p]])
                    (range 1 (inc page-count))))])))
 
 (defn render [ctx]

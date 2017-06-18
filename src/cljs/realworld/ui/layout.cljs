@@ -4,12 +4,13 @@
 
 (defn render [ctx]
   (let [current-route (route> ctx)
-        current-page (:page current-route)]
+        current-page  (:page current-route)]
     [:div
      [(ui/component ctx :header)]
      (case current-page
-       "home" [(ui/component ctx :page-home)]
+       "home"    [(ui/component ctx :page-home)]
        "profile" [(ui/component ctx :page-profile)]
+       "article" [(ui/component ctx :page-article)]
        [:div "404"])
      [(ui/component ctx :footer)]]))
 
@@ -18,4 +19,5 @@
                    :component-deps [:header
                                     :footer
                                     :page-home
-                                    :page-profile]}))
+                                    :page-profile
+                                    :page-article]}))

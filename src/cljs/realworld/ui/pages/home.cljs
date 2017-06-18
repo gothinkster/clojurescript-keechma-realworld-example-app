@@ -23,7 +23,7 @@
      (doall (map (fn [t]
                    (let [tag (:tag t)
                          url (ui/url ctx (-> current-route
-                                             (dissoc :list-page)
+                                             (dissoc :p)
                                              (assoc :tag tag)))]
                      [:a.tag-pill.tag-default {:href url :key tag} tag])) tags))]))
 
