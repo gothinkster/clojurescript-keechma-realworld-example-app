@@ -2,14 +2,17 @@
   (:require [reagent.core :as reagent]
             [keechma.app-state :as app-state]
             [realworld.controllers :refer [controllers]]
-            [realworld.ui :refer [ui]]))
+            [realworld.ui :refer [ui]]
+            [realworld.subscriptions :refer [subscriptions]]))
 
 (def app-definition
   {:components    ui
    :controllers   controllers 
-   :subscriptions {}
-   :routes [["" {:page "home"}]
-            ":page"]
+   :subscriptions subscriptions
+   :routes        [["" {:page "home"}]
+                   ":page"
+                   ":page/:subpage"
+                   ":page/:subpage/:id"]
    :html-element  (.getElementById js/document "app")})
 
 (defonce running-app (clojure.core/atom))

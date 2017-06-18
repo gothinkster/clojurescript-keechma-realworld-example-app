@@ -3,7 +3,9 @@
                  [org.clojure/clojurescript "1.9.229"]
                  [reagent "0.6.1"]
                  [keechma "0.2.0-SNAPSHOT-12" :exclusions [cljsjs/react-with-addons]]
-                 [keechma/toolbox "0.0.1-SNAPSHOT-4"]]
+                 [keechma/toolbox "0.0.1-SNAPSHOT-4"]
+                 [cljsjs/moment "2.17.1-1"]
+                 [cljsjs/marked "0.3.5-0"]]
 
   :min-lein-version "2.5.3"
 

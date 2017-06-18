@@ -1,12 +1,19 @@
 (ns realworld.ui.layout
-  (:require [keechma.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]
+            [keechma.toolbox.ui :refer [route>]]))
 
 (defn render [ctx]
-  [:div
-   [(ui/component ctx :header)]
-   [:div "CONTENT"]
-   [(ui/component ctx :footer)]])
+  (let [current-route (route> ctx)
+        current-page (:page current-route)]
+    [:div
+     [(ui/component ctx :header)]
+     (case current-page
+       "home" [(ui/component ctx :page-home)]
+       [:div "404"])
+     [(ui/component ctx :footer)]]))
 
 (def component
   (ui/constructor {:renderer render
-                   :component-deps [:header :footer]}))
+                   :component-deps [:header
+                                    :footer
+                                    :page-home]}))
