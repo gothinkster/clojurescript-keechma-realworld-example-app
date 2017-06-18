@@ -36,10 +36,13 @@
                  (range 1 (inc page-count))))]))
 
 (defn render [ctx]
-  (let [articles (sub> ctx :articles)]
-    [:div
-     (doall (map (fn [a] ^{:key (:slug a)} [render-article ctx a]) articles))
-     [render-pagination ctx]]))
+  (let [articles (sub> ctx :articles)
+        articles-meta (sub> ctx :articles-meta)]
+    (if (= :pending (:status articles-meta))
+      [:div.article-preview "Loading..."]
+      [:div
+       (doall (map (fn [a] ^{:key (:slug a)} [render-article ctx a]) articles))
+       [render-pagination ctx]])))
 
 (def component
   (ui/constructor {:renderer render
