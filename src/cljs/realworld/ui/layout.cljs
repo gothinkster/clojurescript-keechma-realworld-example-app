@@ -9,6 +9,7 @@
      [(ui/component ctx :header)]
      (case current-page
        "home" [(ui/component ctx :page-home)]
+       "profile" [(ui/component ctx :page-profile)]
        [:div "404"])
      [(ui/component ctx :footer)]]))
 
@@ -16,4 +17,5 @@
   (ui/constructor {:renderer render
                    :component-deps [:header
                                     :footer
-                                    :page-home]}))
+                                    :page-home
+                                    :page-profile]}))

@@ -2,10 +2,12 @@
   (:require [keechma.ui-component :as ui]
             [keechma.toolbox.ui :refer [route> sub>]]
             [realworld.util :refer [format-date]]
-            [keechma.toolbox.util :refer [class-names]]))
+            [keechma.toolbox.util :refer [class-names]]
+            [realworld.datasources :refer [articles-per-page]]))
 
 (defn render-article [ctx article]
-  (let [author ((:author article))]
+  (let [author ((:author article))
+        tag-list ((:tagList article))]
     [:div.article-preview
      [:div.article-meta
       [:a {:href (ui/url ctx {:page "profile" :subpage (:username author)})}
@@ -20,26 +22,30 @@
       {:href (ui/url ctx {:page "article" :subpage (:slug article)})}
       [:h1 (:title article)]
       [:p (:description article)]
-      [:span "Read more..."]]]))
+      [:span "Read more..."]
+      (when (seq tag-list)
+        [:ul.tag-list
+         (doall (map (fn [t] [:li.tag-default.tag-pill.tag-outline {:key (:tag t)} (:tag t)]) tag-list))])]]))
 
 (defn render-pagination [ctx]
   (let [articles-meta (sub> ctx :articles-meta)
         current-route (route> ctx)
         current-page (js/parseInt (or (:list-page current-route) "1") 10)
-        page-count (.ceil js/Math (/ (get-in articles-meta [:meta :count]) 20))]
-    [:nav>ul.pagination
-     (doall (map (fn [p]
-                   [:li.page-item
-                    {:key p
-                     :class (class-names {:active (= p current-page)})}
-                    [:a.page-link {:href (ui/url ctx (assoc current-route :list-page p))} p]])
-                 (range 1 (inc page-count))))]))
+        page-count (.ceil js/Math (/ (get-in articles-meta [:meta :count]) articles-per-page))]
+    (when (< 1 page-count)
+      [:nav>ul.pagination
+       (doall (map (fn [p]
+                     [:li.page-item
+                      {:key p
+                       :class (class-names {:active (= p current-page)})}
+                      [:a.page-link {:href (ui/url ctx (assoc current-route :list-page p))} p]])
+                   (range 1 (inc page-count))))])))
 
 (defn render [ctx]
   (let [articles (sub> ctx :articles)
         articles-meta (sub> ctx :articles-meta)]
     (if (= :pending (:status articles-meta))
-      [:div.article-preview "Loading..."]
+      [:div.article-preview "Loading Articles..."]
       [:div
        (doall (map (fn [a] ^{:key (:slug a)} [render-article ctx a]) articles))
        [render-pagination ctx]])))

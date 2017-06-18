@@ -5,6 +5,7 @@
   {:user {:id :username}
    :tag {:id :tag}
    :article {:id :slug
-             :relations {:author [:one :user]}}})
+             :relations {:author [:one :user]
+                         :tagList [:many :tag]}}})
 
 (defentitydb edb-schema)

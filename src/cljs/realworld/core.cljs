@@ -12,7 +12,7 @@
    :routes        [["" {:page "home"}]
                    ":page"
                    ":page/:subpage"
-                   ":page/:subpage/:id"]
+                   ":page/:subpage/:detail"]
    :html-element  (.getElementById js/document "app")})
 
 (defonce running-app (clojure.core/atom))
