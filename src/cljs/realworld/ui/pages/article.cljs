@@ -53,9 +53,14 @@
         [:div.article-actions
          [render-article-meta ctx article]]
         [:div.row>div.col-xs-12.col-md-8.offset-md-2
+         [(ui/component ctx :comment-form)]
          [(ui/component ctx :comments)]]]])))
 
 (def component
   (ui/constructor {:renderer render
                    :subscription-deps [:current-article :current-user]
-                   :component-deps [:comments :favorite-button :follow-button :delete-button]}))
+                   :component-deps [:comments
+                                    :comment-form
+                                    :favorite-button
+                                    :follow-button
+                                    :delete-button]}))

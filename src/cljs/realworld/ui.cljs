@@ -6,6 +6,7 @@
             [realworld.ui.components.favorite-button :as favorite-button]
             [realworld.ui.components.follow-button :as follow-button]
             [realworld.ui.components.delete-button :as delete-button]
+            [realworld.ui.components.comment-form :as comment-form]
             [realworld.ui.pages.article :as page-article]
             [realworld.ui.pages.home :as page-home]
             [realworld.ui.pages.login :as page-login]
@@ -24,6 +25,7 @@
    :favorite-button favorite-button/component
    :follow-button   follow-button/component
    :delete-button   delete-button/component
+   :comment-form    comment-form/component
    :page-home       page-home/component
    :page-profile    page-profile/component
    :page-article    page-article/component

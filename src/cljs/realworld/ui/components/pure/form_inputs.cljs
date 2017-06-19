@@ -22,12 +22,12 @@
 
 
 
-(defn controlled-textarea [{:keys [form-state helpers placeholder label attr]}]
+(defn controlled-textarea [{:keys [form-state helpers placeholder label attr rows]}]
   (let [{:keys [on-change on-blur]} helpers]
     [:fieldset.form-group
      [:textarea.form-control.form-control-lg
       {:placeholder placeholder
-       :rows 8
+       :rows (or rows 8)
        :on-change (on-change attr)
        :on-blur (on-blur attr)
        :value (forms-helpers/attr-get-in form-state attr)}]
