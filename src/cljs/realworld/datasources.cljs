@@ -68,7 +68,9 @@
 (defn auth-header
   ([jwt] (auth-header {} jwt))
   ([headers jwt]
-   (assoc headers :authorization (str "Token " jwt))))
+   (if jwt
+     (assoc headers :authorization (str "Token " jwt))
+     headers)))
 
 (def ignore-datasource :keechma.toolbox.dataloader.core/ignore)
 
