@@ -14,6 +14,7 @@
          "article"  [(ui/component ctx :page-article)]
          "login"    [(ui/component ctx :page-login)]
          "settings" [(ui/component ctx :page-settings)]
+         "register" [(ui/component ctx :page-register)]
          [:div "404"])
        [(ui/component ctx :footer)]])))
 
@@ -26,4 +27,5 @@
                                     :page-profile
                                     :page-article
                                     :page-login
-                                    :page-settings]}))
+                                    :page-settings
+                                    :page-register]}))
