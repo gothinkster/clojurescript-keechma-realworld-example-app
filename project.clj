@@ -3,7 +3,7 @@
                  [org.clojure/clojurescript "1.9.229"]
                  [reagent "0.6.1"]
                  [keechma "0.2.0-SNAPSHOT-12" :exclusions [cljsjs/react-with-addons]]
-                 [keechma/toolbox "0.0.1-SNAPSHOT-4" :exclusions [keechma/entitydb]]
+                 [keechma/toolbox "0.0.1-SNAPSHOT-5" :exclusions [keechma/entitydb]]
                  [keechma/entitydb "0.1.1"]
                  [cljsjs/moment "2.17.1-1"]
                  [cljsjs/marked "0.3.5-0"]
