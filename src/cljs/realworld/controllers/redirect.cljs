@@ -6,19 +6,21 @@
             [promesa.core :as p]))
 
 (defn get-redirect [route app-db]
-  (let [page            (:page route)
-        subpage         (:subpage route)
-        current-user    (get-named-item app-db :user :current)
-        current-article (get-named-item app-db :article :current)]
+  (let [page                   (:page route)
+        subpage                (:subpage route)
+        current-user           (get-named-item app-db :user :current)
+        current-article        (get-named-item app-db :article :current)
+        current-article-author (if current-article ((:author current-article)) nil)]
     (cond
-      (and (= "login" page) current-user)                             {:page "home" :subpage "personal"}
-      (and (= "register" page) current-user)                          {:page "home" :subpage "personal"}
-      (and (= "home" page) (= "personal" subpage) (not current-user)) {:page "home"}
-      (and (= "editor" page) (not current-user))                      {:page "home"}
-      (and (= "settings" page) (not current-user))                    {:page "home"}
-      (and (= "article" page) (not current-article))                  {:page "home"}
-      (and (= "editor" page) (not current-article))                   {:page "home"}
-      :else                                                           nil)))
+      (and (= "login" page) current-user)                                {:page "home" :subpage "personal"}
+      (and (= "register" page) current-user)                             {:page "home" :subpage "personal"}
+      (and (= "home" page) (= "personal" subpage) (not current-user))    {:page "home"}
+      (and (= "editor" page) (not current-user))                         {:page "home"}
+      (and (= "settings" page) (not current-user))                       {:page "home"}
+      (and (= "article" page) (not current-article))                     {:page "home"}
+      (and (= "editor" page) (not current-article))                      {:page "home"}
+      (and (= "editor" page) (not= current-user current-article-author)) {:page "home"}
+      :else                                                              nil)))
 
 (def controller
   (pp-controller/constructor
