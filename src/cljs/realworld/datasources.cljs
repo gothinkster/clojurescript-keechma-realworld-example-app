@@ -118,9 +118,8 @@
                                  {:url (str "/articles/" subpage)
                                   :headers (auth-header jwt)
                                   :get-from-app-db (fn [app-db]
-                                                     (let [article (get-item-by-id app-db :article subpage)]
-                                                       (when (:slug article)
-                                                         {:article article})))}))
+                                                     (when-let [article (get-item-by-id app-db :article subpage)]
+                                                       {:article article}))}))
                      :processor process-article
                      :loader api-loader}
 
