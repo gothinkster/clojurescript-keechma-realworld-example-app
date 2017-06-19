@@ -26,13 +26,13 @@
       [:img.user-img {:src (:image user)}]
       [:h4 (:username user)]
       [:p (:bio user)]
-      [:button.btn.btn-sm.btn-outline-secondary.action-btn
-       [:i.ion-plus-round] " Follow " (:username user)]]
+      [:div.pull-xs-right
+       [(ui/component ctx :follow-button) user]]]
      [:div.container>div.row>div.col-xs-12.col-md-10.offset-md-1
       [render-tabs ctx]
       [(ui/component ctx :articles)]]]))
 
 (def component
   (ui/constructor {:renderer render
-                   :component-deps [:articles]
-                   :subscription-deps [:profile-user]}))
+                   :component-deps [:articles :follow-button]
+                   :subscription-deps [:profile-user :current-user]}))

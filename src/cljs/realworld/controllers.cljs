@@ -5,14 +5,16 @@
             [realworld.datasources :refer [datasources]]
             [realworld.edb :refer [edb-schema]]
             [realworld.forms :refer [forms forms-ids]]
-            [realworld.controllers.register-login-redirect :as register-login-redirect]
+            [realworld.controllers.redirect :as redirect]
             [realworld.controllers.initializer :as initializer]
-            [realworld.controllers.logout :as logout]))
+            [realworld.controllers.logout :as logout]
+            [realworld.controllers.user-actions :as user-actions]))
 
 (def controllers
-  (-> {:register-login-redirect register-login-redirect/controller
+  (-> {:redirect redirect/controller
        :initializer initializer/controller
-       :logout logout/controller}
+       :logout logout/controller
+       :user-actions user-actions/controller}
       (forms-controller/register forms)
       (forms-mount-controller/register forms-ids)
       (dataloader-controller/register datasources edb-schema)))

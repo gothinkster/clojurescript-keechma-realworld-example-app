@@ -4,7 +4,9 @@
             [realworld.util :refer [format-date render-markdown]]))
 
 (defn render-article-meta [ctx article]
-  (let [author ((:author article))]
+  (let [author ((:author article))
+        current-user (sub> ctx :current-user)
+        current-user-author? (= author current-user)]
     [:div.article-meta
      [:a {:href (ui/url ctx {:page "profile" :subpage (:username author)})}
       [:img {:src (:image author)}]]
@@ -13,13 +15,15 @@
        {:href (ui/url ctx {:page "profile" :subpage (:username author)})}
        (:username author)]
       [:span.date (format-date (:createdAt article))]]
-     [:button.btn.btn-sm.btn-outline-secondary
-      [:i.ion-plus-round]
-      " Follow " (:username author)]
+     (if current-user-author?
+       [:a.btn.btn-outline-secondary.btn-sm
+        {:href (ui/url ctx {:page "editor" :subpage (:slug article)})}
+        [:i.ion-edit] " Edit Article"]
+       [(ui/component ctx :follow-button) author])
      " "
-     [:button.btn.btn-sm.btn-outline-primary
-      [:i.ion-heart]
-      " Favorite Post (" (:favoritesCount article) ")"]]))
+     (if current-user-author?
+       [(ui/component ctx :delete-button) article]
+       [(ui/component ctx :favorite-button) article :big])]))
 
 (defn render-banner [ctx article]
   [:div.banner>div.container
@@ -53,5 +57,5 @@
 
 (def component
   (ui/constructor {:renderer render
-                   :subscription-deps [:current-article]
-                   :component-deps [:comments]}))
+                   :subscription-deps [:current-article :current-user]
+                   :component-deps [:comments :favorite-button :follow-button :delete-button]}))

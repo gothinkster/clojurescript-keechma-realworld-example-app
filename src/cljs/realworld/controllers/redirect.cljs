@@ -1,4 +1,4 @@
-(ns realworld.controllers.register-login-redirect
+(ns realworld.controllers.redirect
   (:require [keechma.toolbox.pipeline.core :as pp :refer-macros [pipeline!]]
             [keechma.toolbox.pipeline.controller :as pp-controller]
             [keechma.toolbox.dataloader.controller :as dataloader-controller]

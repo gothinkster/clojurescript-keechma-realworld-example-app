@@ -97,6 +97,7 @@
                           (when (or (= "home" page)
                                     (= "profile" page))
                             (-> {:url "/articles"}
+                                (assoc :headers (auth-header jwt))
                                 (add-articles-author-params route)
                                 (add-articles-pagination-param route)
                                 (add-articles-tag-params route)))))
@@ -104,9 +105,13 @@
               :loader api-loader}
 
    :current-article {:target [:edb/named-item :article/current]
-                     :params (fn [_ {:keys [page subpage]} _]
-                               (when (and (= "article" page) subpage)
+                     :deps [:jwt]
+                     :params (fn [_ {:keys [page subpage]} {:keys [jwt]}]
+                               (when (and (or (= "editor" page)
+                                              (= "article" page))
+                                          subpage)
                                  {:url (str "/articles/" subpage)
+                                  :headers (auth-header jwt)
                                   :get-from-app-db (fn [app-db]
                                                      (let [article (get-item-by-id app-db :article subpage)]
                                                        (when (:slug article)
@@ -123,9 +128,11 @@
                               :processor process-comments}
 
    :profile-user {:target [:edb/named-item :user/profile-user]
-                  :params (fn [_ {:keys [page subpage]} _]
+                  :deps [:jwt]
+                  :params (fn [_ {:keys [page subpage]} {:keys [jwt]}]
                             (when (and (= "profile" page) subpage)
                               {:url (str "/profiles/" subpage)
+                               :headers (auth-header jwt)
                                :get-from-app-db (fn [app-db]
                                                   (when-let [user (get-item-by-id app-db :user subpage)]
                                                     {:profile user}))}))

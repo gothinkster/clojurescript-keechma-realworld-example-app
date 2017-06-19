@@ -16,8 +16,7 @@
        [:a {:href (ui/url ctx {:page "profile" :subpage (:username author)})}
         (:username author)]
        [:span.date (format-date (:createdAt article))]]
-      [:button.btn.btn-outline-primary.btn-sm.pull-xs-right
-       [:i.ion-heart] " " (:favoritesCount article)]]
+      [(ui/component ctx :favorite-button) article]]
      [:a.preview-link
       {:href (ui/url ctx {:page "article" :subpage (:slug article)})}
       [:h1 (:title article)]
@@ -52,4 +51,5 @@
 
 (def component
   (ui/constructor {:renderer render
+                   :component-deps [:favorite-button]
                    :subscription-deps [:articles :articles-meta]}))
