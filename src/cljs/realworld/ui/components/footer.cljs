@@ -1,4 +1,4 @@
-(ns realworld.ui.footer
+(ns realworld.ui.components.footer
   (:require [keechma.ui-component :as ui]))
 
 (defn render [ctx]

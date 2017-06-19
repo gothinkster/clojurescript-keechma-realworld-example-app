@@ -1,7 +1,8 @@
 (ns realworld.datasources
   (:require [keechma.toolbox.ajax :refer [GET]]
             [keechma.toolbox.dataloader.subscriptions :refer [map-loader]]
-            [realworld.edb :refer [get-item-by-id]]))
+            [realworld.edb :refer [get-item-by-id]]
+            [hodgepodge.core :refer [get-item local-storage]]))
 
 (def api-endpoint "https://conduit.productionready.io/api")
 (def articles-per-page 20)
@@ -11,10 +12,12 @@
    (fn [req]
      (when-let [params (:params req)]
        (let [app-db (:app-db req)
+             headers (:headers params)
              get-from-app-db (or (:get-from-app-db params) (fn [_] nil))]
          (or (get-from-app-db app-db)
              (GET (str api-endpoint (:url params))
-                  {:params (dissoc params :url)
+                  {:params (dissoc params :url :headers)
+                   :headers headers
                    :response-format :json
                    :keywords? true})))))))
 
@@ -43,6 +46,9 @@
 (defn process-comments [data]
   (:comments data))
 
+(defn process-user [data]
+  (:user data))
+
 (defn add-articles-pagination-param [params {:keys [tag]}]
   (if tag
     (assoc params :tag tag)
@@ -61,9 +67,34 @@
       (assoc params :author subpage))
     params))
 
+(defn auth-header
+  ([jwt] (auth-header {} jwt))
+  ([headers jwt]
+   (assoc headers :authorization (str "Token " jwt))))
+
+(def ignore-datasource :keechma.toolbox.dataloader.core/ignore)
+
 (def datasources
-  {:articles {:target [:edb/collection :article/list]
-              :params (fn [_ route _]
+  {:jwt {:target [:kv :jwt]
+         :loader (map-loader
+                  (fn []
+                    (get-item local-storage "conduit-jwt-token")))
+         :params (fn [prev _ _]
+                   (when (:data prev)
+                     ignore-datasource))}
+   :current-user {:target [:edb/named-item :user/current]
+                  :loader api-loader
+                  :deps [:jwt]
+                  :processor process-user
+                  :params (fn [prev _ {:keys [jwt]}]
+                            (if (:data prev)
+                              ignore-datasource
+                              (when jwt
+                                {:url "/user"
+                                 :headers (auth-header jwt)})))}
+   :articles {:target [:edb/collection :article/list]
+              :deps [:jwt]
+              :params (fn [_ route {:keys [jwt]}]
                         (let [page (:page route)]
                           (when (or (= "home" page)
                                     (= "profile" page))

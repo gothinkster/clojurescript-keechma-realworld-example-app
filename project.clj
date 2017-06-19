@@ -6,7 +6,8 @@
                  [keechma/toolbox "0.0.1-SNAPSHOT-4" :exclusions [keechma/entitydb]]
                  [keechma/entitydb "0.1.1"]
                  [cljsjs/moment "2.17.1-1"]
-                 [cljsjs/marked "0.3.5-0"]]
+                 [cljsjs/marked "0.3.5-0"]
+                 [hodgepodge "0.1.3"]]
 
   :min-lein-version "2.5.3"
 

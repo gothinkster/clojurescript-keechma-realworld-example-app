@@ -1,9 +1,9 @@
-(ns realworld.ui.header
+(ns realworld.ui.components.header
   (:require [keechma.ui-component :as ui]
-            [keechma.toolbox.ui :refer [route>]]
+            [keechma.toolbox.ui :refer [route> sub>]]
             [keechma.toolbox.util :refer [class-names]]))
 
-(def pages
+(def user-pages
   [{:route {:page "home"}
     :title "Home"}
    {:route {:page "editor"}
@@ -11,7 +11,13 @@
     :title "New Post"}
    {:route {:page "settings"}
     :icon "ion-gear-a"
-    :title "Settings"}
+    :title "Settings"}])
+
+(def anon-pages
+  [{:route {:page "home"}
+    :title "Home"}
+   {:route {:page "login"}
+    :title "Sign in"}
    {:route {:page "register"}
     :title "Sign up"}])
 
@@ -26,8 +32,15 @@
       (if icon (str " " title) title)]]))
 
 (defn render-nav [ctx]
-  [:ul.nav.navbar-nav.pull-xs-right
-   (doall (map #(render-nav-item ctx %) pages))])
+  (let [current-user-meta (sub> ctx :current-user-meta)
+        current-user (sub> ctx :current-user)
+        pages (when (= :completed (:status current-user-meta))
+                (if current-user
+                  (conj user-pages {:route {:page "profile" :subpage (:username current-user)}
+                                    :title (:username current-user)})
+                  anon-pages))]
+    [:ul.nav.navbar-nav.pull-xs-right
+     (doall (map #(render-nav-item ctx %) pages))]))
 
 (defn render [ctx]
   [:nav.navbar.navbar-light
@@ -36,4 +49,5 @@
     [render-nav ctx]]])
 
 (def component
-  (ui/constructor {:renderer render}))
+  (ui/constructor {:renderer render
+                   :subscription-deps [:current-user :current-user-meta]}))

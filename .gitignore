@@ -22,3 +22,4 @@ Thumbs.db
 /resources/public/js
 out
 /figwheel_server.log
+/checkouts
