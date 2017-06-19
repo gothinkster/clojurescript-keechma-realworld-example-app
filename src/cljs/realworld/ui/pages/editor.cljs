@@ -8,11 +8,10 @@
             [clojure.string :as str]))
 
 (defn tag-list [form-state]
-  (filter (complement empty?)
-          (-> (get-in form-state [:data :tags])
-              (or "")
-              (str/trim)
-              (str/split #","))))
+  (let [tags (-> (get-in form-state [:data :tags])
+                 (or "")
+                 (str/split #","))]
+    (set (filter (complement empty?) (map str/trim tags)))))
 
 (defn render [ctx]
   (let [form-id [:editor (or (:subpage (route> ctx)) :new)]
