@@ -9,7 +9,9 @@
             [keechma.toolbox.ajax :refer [POST PUT]]
             [keechma.toolbox.pipeline.core :as pp :refer-macros [pipeline!]]
             [realworld.edb :refer [insert-named-item insert-item get-item-by-id]]
-            [realworld.settings :as settings]))
+            [realworld.settings :as settings]
+            [clojure.string :as str]
+            [realworld.datasources :refer [process-article]]))
 
 (def validator (v/validator {:title [[:not-empty validators/not-empty?]]
                              :description [[:not-empty validators/not-empty?]]
@@ -22,6 +24,7 @@
    :format :json
    :headers {:authorization (str "Token " jwt)}})
 
+
 (defrecord EditorForm [validator]
   forms-core/IForm
   (get-data [_ app-db form-id]
@@ -30,6 +33,14 @@
         (pipeline! [value app-db]
           (dataloader-controller/wait-dataloader-pipeline!)
           (get-item-by-id app-db :article id)))))
+  (process-in [this app-db form-id data]
+    (let [tags (str/join ", " (map :tag ((:tagList data))))]
+      (assoc data :tags tags)))
+  (process-out [this app-db form-id data]
+    (let [tag-list (map str/trim (str/split (:tags data) #","))]
+      (-> data
+          (dissoc :tags)
+          (assoc :tagList tag-list))))
   (submit-data [_ app-db _ data]
     (let [slug (:slug data)
           new? (not (boolean slug))
@@ -40,7 +51,7 @@
         (PUT (str settings/api-endpoint "/articles/" slug)
              (prepare-req-params data jwt)))))
   (on-submit-success [this app-db form-id data]
-    (let [article (:article data)
+    (let [article (process-article data)
           slug (:slug article)]
       (pipeline! [value app-db]
         (pp/commit! (insert-item app-db :article article))

@@ -35,7 +35,7 @@
    (doall (map (fn [t]
                  (let [tag (:tag t)]
                    ^{:key tag} [:li.tag-default.tag-pill.tag-outline
-                                [:a {:href (ui/url ctx {:page "home" :tag tag})} tag]]))
+                                [:a {:href (ui/url ctx {:page "home" :subpage "tag" :detail tag})} tag]]))
                ((:tagList article))))])
 
 (defn render [ctx]
