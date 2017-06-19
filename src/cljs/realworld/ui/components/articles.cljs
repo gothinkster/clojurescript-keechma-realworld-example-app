@@ -45,9 +45,11 @@
         articles-meta (sub> ctx :articles-meta)]
     (if (= :pending (:status articles-meta))
       [:div.article-preview "Loading Articles..."]
-      [:div
-       (doall (map (fn [a] ^{:key (:slug a)} [render-article ctx a]) articles))
-       [render-pagination ctx]])))
+      (if (zero? (count articles))
+        [:div.article-preview "No articles are here... yet."]
+        [:div
+         (doall (map (fn [a] ^{:key (:slug a)} [render-article ctx a]) articles))
+         [render-pagination ctx]]))))
 
 (def component
   (ui/constructor {:renderer render

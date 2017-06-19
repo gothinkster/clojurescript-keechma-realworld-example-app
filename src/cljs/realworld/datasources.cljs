@@ -47,18 +47,19 @@
 (defn process-user [data]
   (:user data))
 
-(defn add-articles-pagination-param [params {:keys [tag]}]
-  (if tag
-    (assoc params :tag tag)
-    params))
+(defn add-articles-tag-param [params {:keys [subpage detail]}]
+  (let [tag (when (= "tag" subpage) detail)]
+    (if tag
+      (assoc params :tag tag)
+      params)))
 
-(defn add-articles-tag-params [params {:keys [p]}]
+(defn add-articles-pagination-param [params {:keys [p]}]
   (if p
     (let [offset (* (dec (js/parseInt p 10)) settings/articles-per-page)]
       (assoc params :offset offset))
     params))
 
-(defn add-articles-author-params [params {:keys [page subpage detail]}]
+(defn add-articles-author-param [params {:keys [page subpage detail]}]
   (if (and (= "profile" page) subpage)
     (if (= "favorites" detail)
       (assoc params :favorited subpage)
@@ -95,14 +96,16 @@
    :articles {:target [:edb/collection :article/list]
               :deps [:jwt]
               :params (fn [_ route {:keys [jwt]}]
-                        (let [page (:page route)]
+                        (let [page (:page route)
+                              subpage (:subpage route)
+                              personal-feed? (and (= "home" page) (= "personal" subpage))]
                           (when (or (= "home" page)
                                     (= "profile" page))
-                            (-> {:url "/articles"}
+                            (-> {:url (if personal-feed? "/articles/feed" "/articles")}
                                 (assoc :headers (auth-header jwt))
-                                (add-articles-author-params route)
+                                (add-articles-author-param route)
                                 (add-articles-pagination-param route)
-                                (add-articles-tag-params route)))))
+                                (add-articles-tag-param route)))))
               :processor process-articles
               :loader api-loader}
 
@@ -117,8 +120,7 @@
                                   :get-from-app-db (fn [app-db]
                                                      (let [article (get-item-by-id app-db :article subpage)]
                                                        (when (:slug article)
-                                                         {:article article}))
-                                                     )}))
+                                                         {:article article})))}))
                      :processor process-article
                      :loader api-loader}
 

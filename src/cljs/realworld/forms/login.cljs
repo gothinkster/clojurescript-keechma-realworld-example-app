@@ -32,7 +32,7 @@
         (pp/commit! (-> app-db
                         (assoc-in [:kv :jwt] jwt)
                         (insert-named-item :user :current user)))
-        (pp/redirect! {:page "home"})))))
+        (pp/redirect! {:page "home" :subpage "personal"})))))
 
 (defn constructor []
   (->LoginForm validator))

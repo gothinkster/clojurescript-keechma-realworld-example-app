@@ -5,16 +5,24 @@
 
 (defn render-tabs [ctx]
   (let [current-route (route> ctx)
-        current-tag (:tag current-route)]
+        current-tab (:subpage current-route)
+        current-tag (when (= "tag" current-tab) (:detail current-route))
+        current-user (sub> ctx :current-user)]
     [:ul.nav.nav-pills.outline-active
+     (when current-user
+       [:li.nav-item
+        [:a.nav-link
+         {:href (ui/url ctx {:page "home" :subpage "personal"})
+          :class (class-names {:active (= "personal" current-tab)})}
+         "Your Feed"]])
      [:li.nav-item
       [:a.nav-link
        {:href (ui/url ctx {:page "home"})
-        :class (class-names {:active (not current-tag)})}
+        :class (class-names {:active (and (nil? current-tab) (not current-tag))})}
        "Global Feed"]]
      (when current-tag
        [:li.nav-item
-        [:a.nav-link.active {:href (ui/url ctx {:page "home" :tag current-tag})} current-tag]])]))
+        [:a.nav-link.active {:href (ui/url ctx {:page "home" :tag current-tag})} [:i.ion-pound] " " current-tag]])]))
 
 (defn render-taglist [ctx]
   (let [tags (sub> ctx :tags)
@@ -22,9 +30,7 @@
     [:div.tag-list
      (doall (map (fn [t]
                    (let [tag (:tag t)
-                         url (ui/url ctx (-> current-route
-                                             (dissoc :p)
-                                             (assoc :tag tag)))]
+                         url (ui/url ctx {:page "home" :subpage "tag" :detail tag})]
                      [:a.tag-pill.tag-default {:href url :key tag} tag])) tags))]))
 
 (defn render [ctx]
@@ -44,4 +50,4 @@
 (def component
   (ui/constructor {:renderer render
                    :component-deps [:articles]
-                   :subscription-deps [:tags]}))
+                   :subscription-deps [:tags :current-user]}))

@@ -6,7 +6,7 @@
   (when-let [errors (get-in attr-errors [:$errors$ :failed])]
     (into [:ul.error-messages]
           (doall (map (fn [e]
-                        [:li(validators/get-validator-message e)])
+                        [:li (validators/get-validator-message e)])
                       errors)))))
 
 (defn controlled-input [{:keys [form-state helpers placeholder label attr input-type]}]
@@ -19,8 +19,6 @@
        :type (or input-type :text)
        :value (forms-helpers/attr-get-in form-state attr)}]
      (render-errors (forms-helpers/attr-errors form-state attr))]))
-
-
 
 (defn controlled-textarea [{:keys [form-state helpers placeholder label attr rows]}]
   (let [{:keys [on-change on-blur]} helpers]

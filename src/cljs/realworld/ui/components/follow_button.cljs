@@ -6,13 +6,16 @@
 (defn render
   ([ctx user]
    (let [current-user (sub> ctx :current-user)
-         following? (:following user)]
+         following? (:following user)
+         action (if current-user
+                  #(<cmd ctx :toggle-follow user)
+                  #(ui/redirect ctx {:page "register"}))]
      (if (= current-user user)
        [:a.btn.btn-sm.btn-outline-secondary
         {:href (ui/url ctx {:page "settings"})}
         [:i.ion-gear-a] " Edit Profile Settings"]
        [:button.btn.btn-sm
-        {:on-click #(<cmd ctx :toggle-follow user)
+        {:on-click action
          :class (class-names {:btn-outline-secondary (not following?)
                               :btn-secondary following?})}
         [:i.ion-plus-round] (str (if following? " Unfollow " " Follow ") (:username user))]))))

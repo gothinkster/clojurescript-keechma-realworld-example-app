@@ -39,7 +39,8 @@
                ((:tagList article))))])
 
 (defn render [ctx]
-  (let [article (sub> ctx :current-article)]
+  (let [article (sub> ctx :current-article)
+        current-user (sub> ctx :current-user)]
     (when article
       [:div.article-page
        [render-banner ctx article]
@@ -53,7 +54,13 @@
         [:div.article-actions
          [render-article-meta ctx article]]
         [:div.row>div.col-xs-12.col-md-8.offset-md-2
-         [(ui/component ctx :comment-form)]
+         (if current-user
+           [(ui/component ctx :comment-form)]
+           [:p
+            [:a {:href (ui/url ctx {:page "login"})} "Sign in"]
+            " or "
+            [:a {:href (ui/url ctx {:page "register"})} "sign up"]
+            " to add comments on this article."])
          [(ui/component ctx :comments)]]]])))
 
 (def component
