@@ -2,10 +2,8 @@
   (:require [keechma.toolbox.ajax :refer [GET]]
             [keechma.toolbox.dataloader.subscriptions :refer [map-loader]]
             [realworld.edb :refer [get-item-by-id]]
-            [hodgepodge.core :refer [get-item local-storage]]))
-
-(def api-endpoint "https://conduit.productionready.io/api")
-(def articles-per-page 20)
+            [hodgepodge.core :refer [get-item local-storage]]
+            [realworld.settings :as settings]))
 
 (def api-loader
   (map-loader
@@ -15,7 +13,7 @@
              headers (:headers params)
              get-from-app-db (or (:get-from-app-db params) (fn [_] nil))]
          (or (get-from-app-db app-db)
-             (GET (str api-endpoint (:url params))
+             (GET (str settings/api-endpoint (:url params))
                   {:params (dissoc params :url :headers)
                    :headers headers
                    :response-format :json
@@ -56,7 +54,7 @@
 
 (defn add-articles-tag-params [params {:keys [p]}]
   (if p
-    (let [offset (* (dec (js/parseInt p 10)) articles-per-page)]
+    (let [offset (* (dec (js/parseInt p 10)) settings/articles-per-page)]
       (assoc params :offset offset))
     params))
 
@@ -87,9 +85,9 @@
                   :deps [:jwt]
                   :processor process-user
                   :params (fn [prev _ {:keys [jwt]}]
-                            (if (:data prev)
-                              ignore-datasource
-                              (when jwt
+                            (when jwt
+                              (if (:data prev)
+                                ignore-datasource
                                 {:url "/user"
                                  :headers (auth-header jwt)})))}
    :articles {:target [:edb/collection :article/list]

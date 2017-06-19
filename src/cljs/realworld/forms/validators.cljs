@@ -18,7 +18,9 @@
     :else true))
 
 (defn url? [v _ _]
-  (not (nil? (re-matches url-regex (str v)))))
+  (if (or (nil? v) (empty? v))
+    true
+    (not (nil? (re-matches url-regex (str v))))))
 
 (defn email? [v _ _] 
   (not (nil? (re-matches email-regex (str v)))))

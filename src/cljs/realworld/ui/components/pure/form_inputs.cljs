@@ -27,7 +27,7 @@
     [:fieldset.form-group
      [:textarea.form-control.form-control-lg
       {:placeholder placeholder
-       :rows 10
+       :rows 8
        :on-change (on-change attr)
        :on-blur (on-blur attr)
        :value (forms-helpers/attr-get-in form-state attr)}]

@@ -3,7 +3,7 @@
             [keechma.toolbox.ui :refer [route> sub>]]
             [realworld.util :refer [format-date]]
             [keechma.toolbox.util :refer [class-names]]
-            [realworld.datasources :refer [articles-per-page]]))
+            [realworld.settings :as settings]))
 
 (defn render-article [ctx article]
   (let [author ((:author article))
@@ -31,7 +31,7 @@
   (let [articles-meta (sub> ctx :articles-meta)
         current-route (route> ctx)
         current-page (js/parseInt (or (:p current-route) "1") 10)
-        page-count (.ceil js/Math (/ (get-in articles-meta [:meta :count]) articles-per-page))]
+        page-count (.ceil js/Math (/ (get-in articles-meta [:meta :count]) settings/articles-per-page))]
     (when (< 1 page-count)
       [:nav>ul.pagination
        (doall (map (fn [p]
