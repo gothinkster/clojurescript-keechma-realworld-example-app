@@ -9,6 +9,7 @@
             [realworld.ui.pages.profile :as page-profile]
             [realworld.ui.pages.settings :as page-settings]
             [realworld.ui.pages.register :as page-register]
+            [realworld.ui.pages.editor :as page-editor]
             [realworld.ui.main :as main]))
 
 (def ui
@@ -22,4 +23,5 @@
    :page-article  page-article/component
    :page-login    page-login/component
    :page-register page-register/component
-   :page-settings page-settings/component})
+   :page-settings page-settings/component
+   :page-editor   page-editor/component})

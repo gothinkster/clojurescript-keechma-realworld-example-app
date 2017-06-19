@@ -15,6 +15,7 @@
          "login"    [(ui/component ctx :page-login)]
          "settings" [(ui/component ctx :page-settings)]
          "register" [(ui/component ctx :page-register)]
+         "editor"   [(ui/component ctx :page-editor)]
          [:div "404"])
        [(ui/component ctx :footer)]])))
 
@@ -28,4 +29,5 @@
                                     :page-article
                                     :page-login
                                     :page-settings
-                                    :page-register]}))
+                                    :page-register
+                                    :page-editor]}))
