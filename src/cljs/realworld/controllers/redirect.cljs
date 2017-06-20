@@ -2,8 +2,7 @@
   (:require [keechma.toolbox.pipeline.core :as pp :refer-macros [pipeline!]]
             [keechma.toolbox.pipeline.controller :as pp-controller]
             [keechma.toolbox.dataloader.controller :as dataloader-controller]
-            [realworld.edb :refer [get-named-item]]
-            [promesa.core :as p]))
+            [realworld.edb :refer [get-named-item]]))
 
 (defn get-redirect [route app-db]
   (let [page                   (:page route)

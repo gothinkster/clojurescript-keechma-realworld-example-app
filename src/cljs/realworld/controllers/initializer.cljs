@@ -1,8 +1,7 @@
 (ns realworld.controllers.initializer
   (:require [keechma.toolbox.pipeline.core :as pp :refer-macros [pipeline!]]
             [keechma.toolbox.pipeline.controller :as pp-controller]
-            [keechma.toolbox.dataloader.controller :as dataloader-controller]
-            [promesa.core :as p]))
+            [keechma.toolbox.dataloader.controller :as dataloader-controller]))
 
 (def controller
   (pp-controller/constructor

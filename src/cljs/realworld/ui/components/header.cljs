@@ -43,10 +43,11 @@
      (doall (map #(render-nav-item ctx %) pages))]))
 
 (defn render [ctx]
-  (let [current-user (sub> ctx :current-user)]
+  (let [current-user (sub> ctx :current-user)
+        home-route (if current-user {:page "home" :subpage "personal"} {:page "home"})]
     [:nav.navbar.navbar-light
      [:div.container
-      [:a.navbar-brand {:href (ui/url ctx (if current-user {:page "home" :subpage "personal"} {:page "home"}))} "conduit"]
+      [:a.navbar-brand {:href (ui/url ctx home-route)} "conduit"]
       [render-nav ctx]]]))
 
 (def component
