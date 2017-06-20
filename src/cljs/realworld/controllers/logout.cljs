@@ -16,7 +16,4 @@
              (pp/commit! (-> app-db
                              (assoc-in [:kv :jwt] nil)
                              (remove-named-item :user :current)))
-             (pp/redirect! {:page "home"})
-             (println "AAA ")
-             (rescue! [error]
-               (println error)))}))
+             (pp/redirect! {:page "home"}))}))

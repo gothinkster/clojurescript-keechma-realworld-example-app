@@ -5,7 +5,7 @@
             [realworld.settings :as settings]
             [realworld.edb :refer [insert-item get-named-item remove-item]]
             [promesa.core :as p]
-            [realworld.datasources :refer [process-article]]))
+            [realworld.api :as api]))
 
 (defn make-req-params [jwt]
   {:keywords? true
@@ -15,21 +15,19 @@
 
 (defn toggle-favorite [article app-db]
   (let [jwt (get-in app-db [:kv :jwt])
-        slug (:slug article)
-        endpoint (str settings/api-endpoint "/articles/" slug "/favorite")
-        action (if (:favorited article) DELETE POST)]
+        slug (:slug article)]
     (when jwt
-      (->> (action endpoint (make-req-params jwt))
-           (p/map process-article)))))
+      (if (:favorited article)
+        (api/favorite-delete jwt slug)
+        (api/favorite-create jwt slug)))))
 
 (defn toggle-follow [user app-db]
   (let [jwt (get-in app-db [:kv :jwt])
-        username (:username user)
-        endpoint (str settings/api-endpoint "/profiles/" username "/follow")
-        action (if (:following user) DELETE POST)]
+        username (:username user)]
     (when jwt
-      (->> (action endpoint (make-req-params jwt))
-           (p/map :profile)))))
+      (if (:following user)
+        (api/follow-delete jwt username)
+        (api/follow-create jwt username)))))
 
 (defn current-user-article-author? [article app-db]
   (let [author ((:author article))
@@ -39,8 +37,7 @@
 (defn delete-article [article app-db]
   (let [slug (:slug article)
         jwt (get-in app-db [:kv :jwt])]
-    (->> (DELETE (str settings/api-endpoint "/articles/" slug)
-                 (make-req-params jwt))
+    (->> (api/article-delete jwt slug)
          (p/map (fn [_] article)))))
 
 (def controller

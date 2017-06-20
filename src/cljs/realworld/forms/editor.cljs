@@ -2,28 +2,15 @@
   (:require [keechma.toolbox.forms.core :as forms-core]
             [forms.validator :as v]
             [realworld.forms.validators :as validators]
-            [promesa.core :as p]
-            [keechma.toolbox.pipeline.core :as pp]
-            [keechma.toolbox.forms.core :as forms-core]
             [keechma.toolbox.dataloader.controller :as dataloader-controller]
-            [keechma.toolbox.ajax :refer [POST PUT]]
             [keechma.toolbox.pipeline.core :as pp :refer-macros [pipeline!]]
-            [realworld.edb :refer [insert-named-item insert-item get-item-by-id]]
-            [realworld.settings :as settings]
+            [realworld.edb :refer [insert-item get-item-by-id]]
             [clojure.string :as str]
-            [realworld.datasources :refer [process-article]]))
+            [realworld.api :as api]))
 
 (def validator (v/validator {:title [[:not-empty validators/not-empty?]]
                              :description [[:not-empty validators/not-empty?]]
                              :body [[:not-empty validators/not-empty?]]}))
-
-(defn prepare-req-params [article jwt]
-  {:params {:article article}
-   :response-format :json
-   :keywords? true
-   :format :json
-   :headers {:authorization (str "Token " jwt)}})
-
 
 (defrecord EditorForm [validator]
   forms-core/IForm
@@ -46,13 +33,10 @@
           new? (not (boolean slug))
           jwt (get-in app-db [:kv :jwt])]
       (if new?
-        (POST (str settings/api-endpoint "/articles")
-              (prepare-req-params data jwt))
-        (PUT (str settings/api-endpoint "/articles/" slug)
-             (prepare-req-params data jwt)))))
-  (on-submit-success [this app-db form-id data]
-    (let [article (process-article data)
-          slug (:slug article)]
+        (api/article-create jwt data)
+        (api/article-update jwt slug data))))
+  (on-submit-success [this app-db form-id article]
+    (let [slug (:slug article)]
       (pipeline! [value app-db]
         (pp/commit! (insert-item app-db :article article))
         (pp/redirect! {:page "article" :subpage slug})))))

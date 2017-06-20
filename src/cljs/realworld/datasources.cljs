@@ -3,49 +3,17 @@
             [keechma.toolbox.dataloader.subscriptions :refer [map-loader]]
             [realworld.edb :refer [get-item-by-id]]
             [hodgepodge.core :refer [get-item local-storage]]
-            [realworld.settings :as settings]))
+            [realworld.settings :as settings]
+            [realworld.api :as api]))
 
 (def api-loader
   (map-loader
    (fn [req]
      (when-let [params (:params req)]
        (let [app-db (:app-db req)
-             headers (:headers params)
              get-from-app-db (or (:get-from-app-db params) (fn [_] nil))]
          (or (get-from-app-db app-db)
-             (GET (str settings/api-endpoint (:url params))
-                  {:params (dissoc params :url :headers)
-                   :headers headers
-                   :response-format :json
-                   :keywords? true})))))))
-
-(defn tag->entity [tag]
-  (if (string? tag)
-    {:tag tag}
-    tag))
-
-(defn process-articles [data] 
-  {:data (map (fn [article]
-                (assoc article :tagList (map tag->entity (:tagList article))))
-              (:articles data))
-   :meta {:count (:articlesCount data)}})
-
-(defn process-article [data]
-  (let [article (:article data)
-        tag-list (:tagList article)] 
-    (assoc article :tagList (map tag->entity (if (fn? tag-list) (tag-list) tag-list)))))
-
-(defn process-tags [data]
-  (map tag->entity (:tags data)))
-
-(defn process-author [data]
-  (:profile data))
-
-(defn process-comments [data]
-  (:comments data))
-
-(defn process-user [data]
-  (:user data))
+             (api/dataloader-req params)))))))
 
 (defn add-articles-tag-param [params {:keys [subpage detail]}]
   (let [tag (when (= "tag" subpage) detail)]
@@ -86,7 +54,7 @@
    :current-user {:target [:edb/named-item :user/current]
                   :loader api-loader
                   :deps [:jwt]
-                  :processor process-user
+                  :processor api/process-user
                   :params (fn [prev _ {:keys [jwt]}]
                             (when jwt
                               (if (:data prev)
@@ -106,7 +74,7 @@
                                 (add-articles-author-param route)
                                 (add-articles-pagination-param route)
                                 (add-articles-tag-param route)))))
-              :processor process-articles
+              :processor api/process-articles
               :loader api-loader}
 
    :current-article {:target [:edb/named-item :article/current]
@@ -120,7 +88,7 @@
                                   :get-from-app-db (fn [app-db]
                                                      (when-let [article (get-item-by-id app-db :article subpage)]
                                                        {:article article}))}))
-                     :processor process-article
+                     :processor api/process-article
                      :loader api-loader}
 
    :current-article-comments {:target [:edb/collection :comment/list]
@@ -128,7 +96,7 @@
                                (when (and (= "article" page) subpage)
                                  {:url (str "/articles/" subpage "/comments")}))
                               :loader api-loader
-                              :processor process-comments}
+                              :processor api/process-comments}
 
    :profile-user {:target [:edb/named-item :user/profile-user]
                   :deps [:jwt]
@@ -139,12 +107,12 @@
                                :get-from-app-db (fn [app-db]
                                                   (when-let [user (get-item-by-id app-db :user subpage)]
                                                     {:profile user}))}))
-                  :processor process-author
+                  :processor api/process-author
                   :loader    api-loader}
 
    :tags {:target [:edb/collection :tag/list]
           :params (fn [_ {:keys [page]} _]
                     (when (= "home" page)
                       {:url "/tags"}))
-          :processor process-tags
+          :processor api/process-tags
           :loader api-loader}})

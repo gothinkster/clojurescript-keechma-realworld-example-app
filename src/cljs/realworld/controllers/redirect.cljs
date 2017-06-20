@@ -14,15 +14,15 @@
         personal-page          {:page "home" :subpage "personal"}
         home-page              {:page "home"}]
     (cond
-      (and (= "login" page) current-user)                                                personal-page 
-      (and (= "register" page) current-user)                                             personal-page 
-      (and (= "home" page) (= "personal" subpage) (not current-user))                    home-page 
-      (and (= "editor" page) (not current-user))                                         home-page 
-      (and (= "settings" page) (not current-user))                                       home-page 
-      (and (= "article" page) (not current-article))                                     home-page 
-      (and (= "editor" page) (not current-article))                                      home-page 
+      (and (= "login" page) current-user)                                        personal-page 
+      (and (= "register" page) current-user)                                     personal-page 
+      (and (= "home" page) (= "personal" subpage) (not current-user))            home-page 
+      (and (= "editor" page) (not current-user))                                 home-page 
+      (and (= "settings" page) (not current-user))                               home-page 
+      (and (= "article" page) (not current-article))                             home-page 
+      (and (= "editor" page) (not current-article))                              home-page 
       (and (= "editor" page) subpage (not= current-user current-article-author)) home-page 
-      :else                                                                              nil)))
+      :else                                                                      nil)))
 
 (defn redirect! [route app-db]
   (let [redirect-to (get-redirect route app-db)]
