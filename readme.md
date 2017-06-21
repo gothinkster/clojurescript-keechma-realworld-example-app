@@ -15,9 +15,12 @@ For more information on how to this works with other frontends/backends, head ov
 
 # How it works
 
-> Describe the general architecture of your app here
+Read the architecture overview [here](https://keechma.com/news/writing-a-realworld-app-with-keechma/)
 
 # Getting started
 
-> npm install, npm start, etc.
+Make sure you have [leiningen](https://leiningen.org/) installed
 
+Run:
+
+> lein figwheel dev
