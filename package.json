@@ -1,0 +1,13 @@
+{
+  "name": "keechma-realworld",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "repository": "https://github.com/keechma/realworld-starter-kit",
+  "license": "MIT",
+  "devDependencies": {
+    "karma": "^0.13.16",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cljs-test": "^0.1.0"
+  }
+}
