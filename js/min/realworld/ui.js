@@ -1,0 +1,20 @@
+// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+goog.provide('realworld.ui');
+goog.require('cljs.core');
+goog.require('realworld.ui.pages.article');
+goog.require('realworld.ui.pages.login');
+goog.require('realworld.ui.components.favorite_button');
+goog.require('realworld.ui.components.delete_button');
+goog.require('realworld.ui.main');
+goog.require('realworld.ui.pages.profile');
+goog.require('realworld.ui.pages.home');
+goog.require('realworld.ui.components.follow_button');
+goog.require('realworld.ui.components.header');
+goog.require('realworld.ui.pages.settings');
+goog.require('realworld.ui.components.comments');
+goog.require('realworld.ui.components.articles');
+goog.require('realworld.ui.pages.editor');
+goog.require('realworld.ui.components.comment_form');
+goog.require('realworld.ui.components.footer');
+goog.require('realworld.ui.pages.register');
+realworld.ui.ui = cljs.core.PersistentHashMap.fromArrays([cljs.core.cst$kw$page_DASH_home,cljs.core.cst$kw$follow_DASH_button,cljs.core.cst$kw$articles,cljs.core.cst$kw$comments,cljs.core.cst$kw$page_DASH_editor,cljs.core.cst$kw$footer,cljs.core.cst$kw$header,cljs.core.cst$kw$page_DASH_profile,cljs.core.cst$kw$page_DASH_settings,cljs.core.cst$kw$page_DASH_register,cljs.core.cst$kw$delete_DASH_button,cljs.core.cst$kw$comment_DASH_form,cljs.core.cst$kw$page_DASH_login,cljs.core.cst$kw$main,cljs.core.cst$kw$page_DASH_article,cljs.core.cst$kw$favorite_DASH_button],[realworld.ui.pages.home.component,realworld.ui.components.follow_button.component,realworld.ui.components.articles.component,realworld.ui.components.comments.component,realworld.ui.pages.editor.component,realworld.ui.components.footer.component,realworld.ui.components.header.component,realworld.ui.pages.profile.component,realworld.ui.pages.settings.component,realworld.ui.pages.register.component,realworld.ui.components.delete_button.component,realworld.ui.components.comment_form.component,realworld.ui.pages.login.component,realworld.ui.main.component,realworld.ui.pages.article.component,realworld.ui.components.favorite_button.component]);
