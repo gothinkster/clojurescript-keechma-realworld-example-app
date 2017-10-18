@@ -13,24 +13,26 @@
                              :email [[:not-empty validators/not-empty?]
                                      [:email validators/email?]]}))
 
-(defrecord SettingsForm [validator]
-  forms-core/IForm
-  (get-data [this app-db form-id]
+(defrecord SettingsForm [validator])
+
+(defmethod forms-core/get-data SettingsForm [this app-db form-id]
+  (pipeline! [value app-db]
+    (dataloader-controller/wait-dataloader-pipeline!)
+    (get-named-item app-db :user :current)))
+
+(defmethod forms-core/submit-data SettingsForm [_ app-db _ data]
+  (let [user-data (if (seq (:password data)) data (dissoc data :password))
+        jwt (get-in app-db [:kv :jwt])]
+    (api/user-update jwt user-data)))
+
+(defmethod forms-core/on-submit-success SettingsForm [this app-db form-id user]
+  (let [jwt (:token user)]
     (pipeline! [value app-db]
-      (dataloader-controller/wait-dataloader-pipeline!)
-      (get-named-item app-db :user :current)))
-  (submit-data [_ app-db _ data]
-    (let [user-data (if (seq (:password data)) data (dissoc data :password))
-          jwt (get-in app-db [:kv :jwt])]
-      (api/user-update jwt user-data)))
-  (on-submit-success [this app-db form-id user]
-    (let [jwt (:token user)]
-      (pipeline! [value app-db]
-        (set-item local-storage settings/jwt-local-storage-name jwt)
-        (pp/commit! (-> app-db
-                        (assoc-in [:kv :jwt] jwt)
-                        (insert-named-item :user :current user)))
-        (pp/redirect! {:page "profile" :subpage (:username user)})))))
+      (set-item local-storage settings/jwt-local-storage-name jwt)
+      (pp/commit! (-> app-db
+                      (assoc-in [:kv :jwt] jwt)
+                      (insert-named-item :user :current user)))
+      (pp/redirect! {:page "profile" :subpage (:username user)}))))
 
 (defn constructor []
   (->SettingsForm validator))

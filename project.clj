@@ -1,9 +1,9 @@
 (defproject realworld "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
-                 [org.clojure/clojurescript "1.9.229"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha17"]
+                 [org.clojure/clojurescript "1.9.854"]
                  [reagent "0.6.1"]
-                 [keechma "0.2.0-SNAPSHOT-12" :exclusions [cljsjs/react-with-addons]]
-                 [keechma/toolbox "0.0.1-SNAPSHOT-5" :exclusions [keechma/entitydb]]
+                 [keechma "0.3.0" :exclusions [cljsjs/react-with-addons]]
+                 [keechma/toolbox "0.1.0" :exclusions [keechma/entitydb]]
                  [keechma/entitydb "0.1.1"]
                  [cljsjs/moment "2.17.1-1"]
                  [cljsjs/marked "0.3.5-0"]

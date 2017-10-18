@@ -9,17 +9,18 @@
 
 (def validator (v/validator {:body [[:not-empty validators/not-empty?]]}))
 
-(defrecord CommentForm [validator]
-  forms-core/IForm
-  (submit-data [_ app-db _ data]
-    (let [current-article (get-named-item app-db :article :current)
-          slug (:slug current-article)
-          jwt (get-in app-db [:kv :jwt])]
-      (api/comment-create jwt slug data)))
-  (on-submit-success [this app-db form-id comment]
-    (pipeline! [value app-db]
-      (pp/send-command! [forms-core/id-key :mount-form] [:comment :form])
-      (pp/commit! (prepend-collection app-db :comment :list [comment])))))
+(defrecord CommentForm [validator])
+
+(defmethod forms-core/submit-data CommentForm [_ app-db _ data]
+  (let [current-article (get-named-item app-db :article :current)
+        slug (:slug current-article)
+        jwt (get-in app-db [:kv :jwt])]
+    (api/comment-create jwt slug data)))
+
+(defmethod forms-core/on-submit-success CommentForm [this app-db form-id comment]
+  (pipeline! [value app-db]
+    (pp/send-command! [forms-core/id-key :mount-form] [:comment :form])
+    (pp/commit! (prepend-collection app-db :comment :list [comment]))))
 
 (defn constructor []
   (->CommentForm validator))

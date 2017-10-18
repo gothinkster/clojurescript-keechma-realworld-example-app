@@ -15,7 +15,7 @@
                    ":page/:subpage/:detail"]
    :html-element  (.getElementById js/document "app")})
 
-(defonce running-app (clojure.core/atom))
+(defonce running-app (clojure.core/atom nil))
 
 (defn start-app! []
   (reset! running-app (app-state/start! app-definition)))
