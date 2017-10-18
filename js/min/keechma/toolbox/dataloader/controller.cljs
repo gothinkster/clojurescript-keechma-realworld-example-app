@@ -12,33 +12,34 @@
                  (<! wait-chan)
                  (resolve)))))
 
-(defn ^:private wait-dataloader-pipeline! []
+(defn wait-dataloader-pipeline! []
   (let [wait-chan (chan)]
     (pipeline! [value app-db]
       (pp/send-command! [dataloader/id-key :waits] wait-chan)
       (chan->promise wait-chan value))))
 
-(defrecord Controller [dataloader]
-  controller/IController
-  (params [this route-params]
-    (:data route-params))
-  (start [this route-params app-db]
-    (controller/execute this :load-data)
-    app-db)
-  (handler [this app-db-atom in-chan out-chan]
-    (go-loop [waits []]
-      (let [[command args] (<! in-chan)]
-        (when command
-          (case command
-            :load-data (do (->> (dataloader app-db-atom)
-                                (p/map #(controller/execute this :loaded-data)))
-                           (recur waits))
-            :loaded-data (do
-                           (doseq [c waits] (close! c))
-                           (recur []))
-            :waits (recur (conj waits args))
-            (recur waits)))))))
+(defrecord Controller [dataloader])
 
+(defmethod controller/params Controller [this route-params]
+  (:data route-params))
+
+(defmethod controller/start Controller [this route-params app-db]
+  (controller/execute this :load-data)
+  app-db)
+
+(defmethod controller/handler Controller [this app-db-atom in-chan out-chan]
+  (go-loop [waits []]
+    (let [[command args] (<! in-chan)]
+      (when command
+        (case command
+          :load-data (do (->> ((:dataloader this) app-db-atom (controller/context this))
+                              (p/map #(controller/execute this :loaded-data)))
+                         (recur waits))
+          :loaded-data (do
+                         (doseq [c waits] (close! c))
+                         (recur []))
+          :waits (recur (conj waits args))
+          (recur waits))))))
 
 (defn constructor
   "Dataloader controller constructor"

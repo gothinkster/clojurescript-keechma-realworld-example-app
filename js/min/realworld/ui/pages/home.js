@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('realworld.ui.pages.home');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('keechma.ui_component');
 goog.require('keechma.toolbox.ui');
 goog.require('keechma.toolbox.util');

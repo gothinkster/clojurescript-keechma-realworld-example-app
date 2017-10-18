@@ -1,52 +1,53 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('keechma.util');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('cljs.core.async');
 keechma.util.update_values = (function keechma$util$update_values(var_args){
-var args__11178__auto__ = [];
-var len__11171__auto___20598 = arguments.length;
-var i__11172__auto___20599 = (0);
+var args__12782__auto__ = [];
+var len__12775__auto___21125 = arguments.length;
+var i__12776__auto___21126 = (0);
 while(true){
-if((i__11172__auto___20599 < len__11171__auto___20598)){
-args__11178__auto__.push((arguments[i__11172__auto___20599]));
+if((i__12776__auto___21126 < len__12775__auto___21125)){
+args__12782__auto__.push((arguments[i__12776__auto___21126]));
 
-var G__20600 = (i__11172__auto___20599 + (1));
-i__11172__auto___20599 = G__20600;
+var G__21127 = (i__12776__auto___21126 + (1));
+i__12776__auto___21126 = G__21127;
 continue;
 } else {
 }
 break;
 }
 
-var argseq__11179__auto__ = ((((2) < args__11178__auto__.length))?(new cljs.core.IndexedSeq(args__11178__auto__.slice((2)),(0),null)):null);
-return keechma.util.update_values.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),argseq__11179__auto__);
+var argseq__12783__auto__ = ((((2) < args__12782__auto__.length))?(new cljs.core.IndexedSeq(args__12782__auto__.slice((2)),(0),null)):null);
+return keechma.util.update_values.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),argseq__12783__auto__);
 });
 
 keechma.util.update_values.cljs$core$IFn$_invoke$arity$variadic = (function (m,f,args){
-return cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (r,p__20594){
-var vec__20595 = p__20594;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__20595,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__20595,(1),null);
+return cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (r,p__21121){
+var vec__21122 = p__21121;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__21122,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__21122,(1),null);
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(r,k,cljs.core.apply.cljs$core$IFn$_invoke$arity$3(f,v,args));
 }),cljs.core.PersistentArrayMap.EMPTY,m);
 });
 
 keechma.util.update_values.cljs$lang$maxFixedArity = (2);
 
-keechma.util.update_values.cljs$lang$applyTo = (function (seq20591){
-var G__20592 = cljs.core.first(seq20591);
-var seq20591__$1 = cljs.core.next(seq20591);
-var G__20593 = cljs.core.first(seq20591__$1);
-var seq20591__$2 = cljs.core.next(seq20591__$1);
-return keechma.util.update_values.cljs$core$IFn$_invoke$arity$variadic(G__20592,G__20593,seq20591__$2);
+keechma.util.update_values.cljs$lang$applyTo = (function (seq21118){
+var G__21119 = cljs.core.first(seq21118);
+var seq21118__$1 = cljs.core.next(seq21118);
+var G__21120 = cljs.core.first(seq21118__$1);
+var seq21118__$2 = cljs.core.next(seq21118__$1);
+return keechma.util.update_values.cljs$core$IFn$_invoke$arity$variadic(G__21119,G__21120,seq21118__$2);
 });
 
 /**
  * true if seq contains elm
  */
 keechma.util.in_QMARK_ = (function keechma$util$in_QMARK_(seq,elm){
-return cljs.core.some((function (p1__20601_SHARP_){
-return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(elm,p1__20601_SHARP_);
+return cljs.core.some((function (p1__21128_SHARP_){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(elm,p1__21128_SHARP_);
 }),seq);
 });
 keechma.util.without = (function keechma$util$without(list,val){
@@ -58,23 +59,8 @@ return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(val,ls_val);
  * Return a channel which will close on the nth next animation frame.
  */
 keechma.util.animation_frame = (function keechma$util$animation_frame(var_args){
-var args20602 = [];
-var len__11171__auto___20606 = arguments.length;
-var i__11172__auto___20607 = (0);
-while(true){
-if((i__11172__auto___20607 < len__11171__auto___20606)){
-args20602.push((arguments[i__11172__auto___20607]));
-
-var G__20608 = (i__11172__auto___20607 + (1));
-i__11172__auto___20607 = G__20608;
-continue;
-} else {
-}
-break;
-}
-
-var G__20604 = args20602.length;
-switch (G__20604) {
+var G__21130 = arguments.length;
+switch (G__21130) {
 case 0:
 return keechma.util.animation_frame.cljs$core$IFn$_invoke$arity$0();
 
@@ -88,7 +74,7 @@ return keechma.util.animation_frame.cljs$core$IFn$_invoke$arity$2((arguments[(0)
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args20602.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });
@@ -102,7 +88,7 @@ return keechma.util.animation_frame.cljs$core$IFn$_invoke$arity$2(n,cljs.core.as
 });
 
 keechma.util.animation_frame.cljs$core$IFn$_invoke$arity$2 = (function (n,out){
-var G__20605_20610 = (function (timestamp){
+var G__21131_21133 = (function (timestamp){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(n,(1))){
 cljs.core.async.put_BANG_.cljs$core$IFn$_invoke$arity$2(out,timestamp);
 
@@ -111,7 +97,7 @@ return cljs.core.async.close_BANG_(out);
 return keechma.util.animation_frame.cljs$core$IFn$_invoke$arity$2((n - (1)),out);
 }
 });
-window.requestAnimationFrame(G__20605_20610);
+window.requestAnimationFrame(G__21131_21133);
 
 return out;
 });
@@ -123,19 +109,19 @@ keechma.util.animation_frame.cljs$lang$maxFixedArity = 2;
  *   nested structure. keys is a sequence of keys. Any empty maps that result
  *   will not be present in the new structure.
  */
-keechma.util.dissoc_in = (function keechma$util$dissoc_in(m,p__20611){
-var vec__20615 = p__20611;
-var seq__20616 = cljs.core.seq(vec__20615);
-var first__20617 = cljs.core.first(seq__20616);
-var seq__20616__$1 = cljs.core.next(seq__20616);
-var k = first__20617;
-var ks = seq__20616__$1;
-var keys = vec__20615;
+keechma.util.dissoc_in = (function keechma$util$dissoc_in(m,p__21134){
+var vec__21135 = p__21134;
+var seq__21136 = cljs.core.seq(vec__21135);
+var first__21137 = cljs.core.first(seq__21136);
+var seq__21136__$1 = cljs.core.next(seq__21136);
+var k = first__21137;
+var ks = seq__21136__$1;
+var keys = vec__21135;
 if(ks){
-var temp__6751__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,k);
-if(cljs.core.truth_(temp__6751__auto__)){
-var nextmap = temp__6751__auto__;
-var newmap = keechma$util$dissoc_in(nextmap,ks);
+var temp__5276__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,k);
+if(cljs.core.truth_(temp__5276__auto__)){
+var nextmap = temp__5276__auto__;
+var newmap = (keechma.util.dissoc_in.cljs$core$IFn$_invoke$arity$2 ? keechma.util.dissoc_in.cljs$core$IFn$_invoke$arity$2(nextmap,ks) : keechma.util.dissoc_in.call(null,nextmap,ks));
 if(cljs.core.seq(newmap)){
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,newmap);
 } else {

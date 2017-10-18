@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('keechma.toolbox.forms.cursor');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 keechma.toolbox.forms.cursor.set_selection_BANG_ = (function keechma$toolbox$forms$cursor$set_selection_BANG_(el,pos){
 el.selectionStart = pos;
 
@@ -23,21 +24,21 @@ if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(clean_new,cljs.core.take.cljs$co
 return start_pos;
 } else {
 if((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(first_old,first_new)) && (is_format_char_QMARK_)){
-var G__24997 = (start_pos + (1));
-var G__24998 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),rest_old);
-var G__24999 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),rest_new);
-start_pos = G__24997;
-rest_old = G__24998;
-rest_new = G__24999;
+var G__24829 = (start_pos + (1));
+var G__24830 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),rest_old);
+var G__24831 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),rest_new);
+start_pos = G__24829;
+rest_old = G__24830;
+rest_new = G__24831;
 continue;
 } else {
 if(cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(rest_new,rest_old)){
-var G__25000 = (start_pos + (1));
-var G__25001 = rest_old;
-var G__25002 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),rest_new);
-start_pos = G__25000;
-rest_old = G__25001;
-rest_new = G__25002;
+var G__24832 = (start_pos + (1));
+var G__24833 = rest_old;
+var G__24834 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),rest_new);
+start_pos = G__24832;
+rest_old = G__24833;
+rest_new = G__24834;
 continue;
 } else {
 return start_pos;
@@ -65,12 +66,12 @@ if(cljs.core.empty_QMARK_(prev_new__$1)){
 return start_pos__$1;
 } else {
 if((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(first_old,first_new)) && (is_format_char_QMARK_)){
-var G__25003 = (start_pos__$1 - (1));
-var G__25004 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),prev_old__$1);
-var G__25005 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),prev_new__$1);
-start_pos__$1 = G__25003;
-prev_old__$1 = G__25004;
-prev_new__$1 = G__25005;
+var G__24835 = (start_pos__$1 - (1));
+var G__24836 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),prev_old__$1);
+var G__24837 = cljs.core.drop.cljs$core$IFn$_invoke$arity$2((1),prev_new__$1);
+start_pos__$1 = G__24835;
+prev_old__$1 = G__24836;
+prev_new__$1 = G__24837;
 continue;
 } else {
 return start_pos__$1;

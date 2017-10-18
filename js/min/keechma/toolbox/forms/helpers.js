@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('keechma.toolbox.forms.helpers');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('keechma.ui_component');
 goog.require('keechma.toolbox.forms.core');
 goog.require('reagent.ratom');
@@ -11,7 +12,7 @@ return keechma.ui_component.subscription.cljs$core$IFn$_invoke$arity$3(ctx,cljs.
 });
 keechma.toolbox.forms.helpers.form_state_sub = (function keechma$toolbox$forms$helpers$form_state_sub(app_db,form_props){
 return reagent.ratom.make_reaction((function (){
-return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2((cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(app_db) : cljs.core.deref.call(null,app_db)),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$kv,keechma.toolbox.forms.core.id_key,cljs.core.cst$kw$states,form_props], null));
+return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(app_db),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$kv,keechma.toolbox.forms.core.id_key,cljs.core.cst$kw$states,form_props], null));
 }));
 });
 keechma.toolbox.forms.helpers.attr_assoc_in = (function keechma$toolbox$forms$helpers$attr_assoc_in(form_state,path,value){
@@ -22,7 +23,7 @@ return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$data.cljs
 });
 keechma.toolbox.forms.helpers.attr_errors = (function keechma$toolbox$forms$helpers$attr_errors(form_state,path){
 var path__$1 = forms.util.key_to_path(path);
-var is_dirty_QMARK_ = cljs.core.contains_QMARK_(cljs.core.cst$kw$dirty_DASH_paths.cljs$core$IFn$_invoke$arity$1(form_state),path__$1);
+var is_dirty_QMARK_ = (cljs.core.contains_QMARK_(cljs.core.cst$kw$cached_DASH_dirty_DASH_paths.cljs$core$IFn$_invoke$arity$1(form_state),path__$1)) || (cljs.core.contains_QMARK_(cljs.core.cst$kw$dirty_DASH_paths.cljs$core$IFn$_invoke$arity$1(form_state),path__$1));
 if(is_dirty_QMARK_){
 return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$errors.cljs$core$IFn$_invoke$arity$1(form_state),path__$1);
 } else {
@@ -45,23 +46,8 @@ keechma.toolbox.forms.helpers.form_submit_attempted_QMARK_ = (function keechma$t
 return cljs.core.cst$kw$submit_DASH_attempted_QMARK_.cljs$core$IFn$_invoke$arity$1(form_state);
 });
 keechma.toolbox.forms.helpers.mark_dirty_paths = (function keechma$toolbox$forms$helpers$mark_dirty_paths(var_args){
-var args22223 = [];
-var len__11171__auto___22226 = arguments.length;
-var i__11172__auto___22227 = (0);
-while(true){
-if((i__11172__auto___22227 < len__11171__auto___22226)){
-args22223.push((arguments[i__11172__auto___22227]));
-
-var G__22228 = (i__11172__auto___22227 + (1));
-i__11172__auto___22227 = G__22228;
-continue;
-} else {
-}
-break;
-}
-
-var G__22225 = args22223.length;
-switch (G__22225) {
+var G__21629 = arguments.length;
+switch (G__21629) {
 case 2:
 return keechma.toolbox.forms.helpers.mark_dirty_paths.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -71,7 +57,7 @@ return keechma.toolbox.forms.helpers.mark_dirty_paths.cljs$core$IFn$_invoke$arit
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args22223.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });
@@ -84,7 +70,7 @@ keechma.toolbox.forms.helpers.mark_dirty_paths.cljs$core$IFn$_invoke$arity$3 = (
 var cached_dirty_paths = cljs.core.cst$kw$cached_DASH_dirty_DASH_key_DASH_paths.cljs$core$IFn$_invoke$arity$1(form_state);
 var new_dirty_paths = cljs.core.set(cljs.core.concat.cljs$core$IFn$_invoke$arity$2(dirty_paths,cached_dirty_paths));
 var new_cached_dirty_paths = (cljs.core.truth_(cache_QMARK_)?new_dirty_paths:cached_dirty_paths);
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$dirty_DASH_paths,new_dirty_paths,cljs.core.cst$kw$cached_DASH_dirty_DASH_paths,cljs.core.array_seq([new_cached_dirty_paths], 0));
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$dirty_DASH_paths,new_dirty_paths,cljs.core.cst$kw$cached_DASH_dirty_DASH_paths,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new_cached_dirty_paths], 0));
 });
 
 keechma.toolbox.forms.helpers.mark_dirty_paths.cljs$lang$maxFixedArity = 3;
@@ -111,31 +97,31 @@ return keechma.ui_component.send_command.cljs$core$IFn$_invoke$arity$3(ctx,cljs.
 });
 ;})(path__$1))
 }),cljs.core.cst$kw$validate,(function() { 
-var G__22230__delegate = function (args){
-var dirty_only_QMARK_ = (function (){var or__9992__auto__ = cljs.core.first(args);
-if(cljs.core.truth_(or__9992__auto__)){
-return or__9992__auto__;
+var G__21631__delegate = function (args){
+var dirty_only_QMARK_ = (function (){var or__11514__auto__ = cljs.core.first(args);
+if(cljs.core.truth_(or__11514__auto__)){
+return or__11514__auto__;
 } else {
 return false;
 }
 })();
 return keechma.ui_component.send_command.cljs$core$IFn$_invoke$arity$3(ctx,cljs.core.cst$kw$on_DASH_validate,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [form_props,dirty_only_QMARK_], null));
 };
-var G__22230 = function (var_args){
+var G__21631 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__22231__i = 0, G__22231__a = new Array(arguments.length -  0);
-while (G__22231__i < G__22231__a.length) {G__22231__a[G__22231__i] = arguments[G__22231__i + 0]; ++G__22231__i;}
-  args = new cljs.core.IndexedSeq(G__22231__a,0);
+var G__21632__i = 0, G__21632__a = new Array(arguments.length -  0);
+while (G__21632__i < G__21632__a.length) {G__21632__a[G__21632__i] = arguments[G__21632__i + 0]; ++G__21632__i;}
+  args = new cljs.core.IndexedSeq(G__21632__a,0,null);
 } 
-return G__22230__delegate.call(this,args);};
-G__22230.cljs$lang$maxFixedArity = 0;
-G__22230.cljs$lang$applyTo = (function (arglist__22232){
-var args = cljs.core.seq(arglist__22232);
-return G__22230__delegate(args);
+return G__21631__delegate.call(this,args);};
+G__21631.cljs$lang$maxFixedArity = 0;
+G__21631.cljs$lang$applyTo = (function (arglist__21633){
+var args = cljs.core.seq(arglist__21633);
+return G__21631__delegate(args);
 });
-G__22230.cljs$core$IFn$_invoke$arity$variadic = G__22230__delegate;
-return G__22230;
+G__21631.cljs$core$IFn$_invoke$arity$variadic = G__21631__delegate;
+return G__21631;
 })()
 ,cljs.core.cst$kw$set_DASH_value,(function (path,value){
 var path__$1 = forms.util.key_to_path(path);

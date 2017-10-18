@@ -1,11 +1,12 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('realworld.forms.validators');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('clojure.string');
 realworld.forms.validators.email_regex = /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/;
 realworld.forms.validators.url_regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/;
 realworld.forms.validators.zero_count_QMARK_ = (function realworld$forms$validators$zero_count_QMARK_(v){
-if(((!((v == null)))?((((v.cljs$lang$protocol_mask$partition0$ & (2))) || (v.cljs$core$ICounted$))?true:(((!v.cljs$lang$protocol_mask$partition0$))?cljs.core.native_satisfies_QMARK_(cljs.core.ICounted,v):false)):cljs.core.native_satisfies_QMARK_(cljs.core.ICounted,v))){
+if(((!((v == null)))?((((v.cljs$lang$protocol_mask$partition0$ & (2))) || ((cljs.core.PROTOCOL_SENTINEL === v.cljs$core$ICounted$)))?true:(((!v.cljs$lang$protocol_mask$partition0$))?cljs.core.native_satisfies_QMARK_(cljs.core.ICounted,v):false)):cljs.core.native_satisfies_QMARK_(cljs.core.ICounted,v))){
 return (cljs.core.count(v) === (0));
 } else {
 return false;
@@ -31,11 +32,11 @@ realworld.forms.validators.url_QMARK_ = (function realworld$forms$validators$url
 if(((v == null)) || (cljs.core.empty_QMARK_(v))){
 return true;
 } else {
-return !((cljs.core.re_matches(realworld.forms.validators.url_regex,[cljs.core.str(v)].join('')) == null));
+return !((cljs.core.re_matches(realworld.forms.validators.url_regex,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(v)].join('')) == null));
 }
 });
 realworld.forms.validators.email_QMARK_ = (function realworld$forms$validators$email_QMARK_(v,_,___$1){
-return !((cljs.core.re_matches(realworld.forms.validators.email_regex,[cljs.core.str(v)].join('')) == null));
+return !((cljs.core.re_matches(realworld.forms.validators.email_regex,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(v)].join('')) == null));
 });
 realworld.forms.validators.number0_GT_100_QMARK_ = (function realworld$forms$validators$number0_GT_100_QMARK_(v,_,___$1){
 if(cljs.core.not(realworld.forms.validators.not_empty_QMARK_(v,null,null))){
@@ -76,9 +77,9 @@ return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(email,email_confirmation);
 }
 })], null),cljs.core.cst$kw$ok_DASH_password,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$message,"Password must have at least 8 characters",cljs.core.cst$kw$validator,realworld.forms.validators.ok_password_QMARK_], null),cljs.core.cst$kw$numeric,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$message,"Value is not a number",cljs.core.cst$kw$validator,realworld.forms.validators.numeric_QMARK_], null)], null);
 realworld.forms.validators.get_validator_message = (function realworld$forms$validators$get_validator_message(type){
-var or__9992__auto__ = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(realworld.forms.validators.types,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [type,cljs.core.cst$kw$message], null));
-if(cljs.core.truth_(or__9992__auto__)){
-return or__9992__auto__;
+var or__11514__auto__ = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(realworld.forms.validators.types,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [type,cljs.core.cst$kw$message], null));
+if(cljs.core.truth_(or__11514__auto__)){
+return or__11514__auto__;
 } else {
 return "Value failed validation.";
 }

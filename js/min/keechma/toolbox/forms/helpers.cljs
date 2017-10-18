@@ -23,7 +23,8 @@
 
 (defn attr-errors [form-state path]
   (let [path (keechma-forms-util/key-to-path path)
-        is-dirty? (contains? (:dirty-paths form-state) path)]
+        is-dirty? (or (contains? (:cached-dirty-paths form-state) path)
+                      (contains? (:dirty-paths form-state) path))]
     (when is-dirty?
       (get-in (:errors form-state) path))))
 

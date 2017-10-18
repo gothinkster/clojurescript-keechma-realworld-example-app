@@ -122,13 +122,16 @@ Runs multiple sideffects sequentially:
 
 (declare run-pipeline)
 
-(defn ^:private action-ret-val [action ctrl app-db-atom value error]
+(defn ^:private action-ret-val [action ctrl context app-db-atom value error]
   (try
-    (let [ret-val (if (nil? error) (action value @app-db-atom) (action value @app-db-atom error))]
+    (let [ret (if (nil? error) (action value @app-db-atom context) (action value @app-db-atom context error))
+          ret-val (:val ret)
+          ret-repr (:repr ret)]
       (if (:pipeline? (meta ret-val))
         {:value (ret-val ctrl app-db-atom value)
          :promise? true}
         {:value ret-val
+         :repr ret-repr
          :promise? (is-promise? ret-val)}))
     (catch :default err
       (if (= ::pipeline-error (:type (.-data err)))
@@ -144,7 +147,8 @@ Runs multiple sideffects sequentially:
 
 (defn ^:private run-pipeline [pipeline ctrl app-db-atom value]
   (let [{:keys [begin rescue]} pipeline
-        current-promise (atom nil)]
+        current-promise (atom nil)
+        context (controller/context ctrl)]
     (p/promise
      (fn [resolve reject on-cancel]
        (when (fn? on-cancel)
@@ -159,13 +163,14 @@ Runs multiple sideffects sequentially:
          (if (not (seq actions))
            (resolve prev-value)
            (let [next (first actions)
-                 {:keys [value promise?]} (action-ret-val next ctrl app-db-atom prev-value error)]
-
+                 {:keys [value promise? repr]} (action-ret-val next ctrl context app-db-atom prev-value error)]
              (when promise?
                (reset! current-promise value))
+             ;;(when repr (println "STARTING" repr))
              (let [sideffect? (satisfies? ISideffect value)
                    resolved-value (if promise? (extract-nil (<! (promise->chan value))) value)
                    error? (instance? Error resolved-value)]
+               ;;(when repr (println "ENDING" repr))
                (when (and promise? sideffect?)
                  (throw (ex-info (:async-sideffect pipeline-errors) {:type ::pipeline-error})))
                (when sideffect?

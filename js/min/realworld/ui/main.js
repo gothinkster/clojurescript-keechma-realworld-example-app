@@ -1,14 +1,15 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('realworld.ui.main');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('keechma.ui_component');
 goog.require('keechma.toolbox.ui');
 realworld.ui.main.render = (function realworld$ui$main$render(ctx){
 var current_route = keechma.toolbox.ui.route_GT_(ctx);
 var current_page = cljs.core.cst$kw$page.cljs$core$IFn$_invoke$arity$1(current_route);
 if(cljs.core.truth_(keechma.toolbox.ui.sub_GT_(ctx,cljs.core.cst$kw$initialized_QMARK_))){
-return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [keechma.ui_component.component(ctx,cljs.core.cst$kw$header)], null),(function (){var G__25343 = current_page;
-switch (G__25343) {
+return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [keechma.ui_component.component(ctx,cljs.core.cst$kw$header)], null),(function (){var G__25179 = current_page;
+switch (G__25179) {
 case "home":
 return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [keechma.ui_component.component(ctx,cljs.core.cst$kw$page_DASH_home)], null);
 

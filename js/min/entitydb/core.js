@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('entitydb.core');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('entitydb.util');
 goog.require('entitydb.relations');
 goog.require('clojure.set');
@@ -22,23 +23,8 @@ entitydb.core.meta_store = cljs.core.cst$kw$__meta_DASH_store__;
  *   
  */
 entitydb.core.insert_item = (function entitydb$core$insert_item(var_args){
-var args24246 = [];
-var len__11171__auto___24249 = arguments.length;
-var i__11172__auto___24250 = (0);
-while(true){
-if((i__11172__auto___24250 < len__11171__auto___24249)){
-args24246.push((arguments[i__11172__auto___24250]));
-
-var G__24251 = (i__11172__auto___24250 + (1));
-i__11172__auto___24250 = G__24251;
-continue;
-} else {
-}
-break;
-}
-
-var G__24248 = args24246.length;
-switch (G__24248) {
+var G__24177 = arguments.length;
+switch (G__24177) {
 case 4:
 return entitydb.core.insert_item.cljs$core$IFn$_invoke$arity$4((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),(arguments[(3)]));
 
@@ -48,7 +34,7 @@ return entitydb.core.insert_item.cljs$core$IFn$_invoke$arity$5((arguments[(0)]),
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args24246.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });
@@ -62,9 +48,9 @@ var id = entitydb.util.get_item_id(schema,entity_kw,item);
 var relations = entitydb.relations.get_relations(schema,entity_kw);
 var db_with_inserted_relations = (entitydb.core.insert_related.cljs$core$IFn$_invoke$arity$6 ? entitydb.core.insert_related.cljs$core$IFn$_invoke$arity$6(schema,db,relations,entity_kw,id,item) : entitydb.core.insert_related.call(null,schema,db,relations,entity_kw,id,item));
 var processed_item = entitydb.relations.remove_related_from_item(cljs.core.keys(relations),(entitydb.util.call_middleware_set.cljs$core$IFn$_invoke$arity$3 ? entitydb.util.call_middleware_set.cljs$core$IFn$_invoke$arity$3(schema,entity_kw,item) : entitydb.util.call_middleware_set.call(null,schema,entity_kw,item)));
-var merged_item = cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq([(function (){var or__9992__auto__ = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(db,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [entity_kw,cljs.core.cst$kw$store,id], null));
-if(cljs.core.truth_(or__9992__auto__)){
-return or__9992__auto__;
+var merged_item = cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (){var or__11514__auto__ = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(db,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [entity_kw,cljs.core.cst$kw$store,id], null));
+if(cljs.core.truth_(or__11514__auto__)){
+return or__11514__auto__;
 } else {
 return cljs.core.PersistentArrayMap.EMPTY;
 }
@@ -105,23 +91,8 @@ return db;
  *   
  */
 entitydb.core.insert_named_item = (function entitydb$core$insert_named_item(var_args){
-var args24253 = [];
-var len__11171__auto___24260 = arguments.length;
-var i__11172__auto___24261 = (0);
-while(true){
-if((i__11172__auto___24261 < len__11171__auto___24260)){
-args24253.push((arguments[i__11172__auto___24261]));
-
-var G__24262 = (i__11172__auto___24261 + (1));
-i__11172__auto___24261 = G__24262;
-continue;
-} else {
-}
-break;
-}
-
-var G__24255 = args24253.length;
-switch (G__24255) {
+var G__24180 = arguments.length;
+switch (G__24180) {
 case 5:
 return entitydb.core.insert_named_item.cljs$core$IFn$_invoke$arity$5((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),(arguments[(3)]),(arguments[(4)]));
 
@@ -131,7 +102,7 @@ return entitydb.core.insert_named_item.cljs$core$IFn$_invoke$arity$6((arguments[
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args24253.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });
@@ -146,11 +117,16 @@ return db;
 } else {
 var id = entitydb.util.get_item_id(schema,entity_kw,item);
 var meta_key = (((item == null))?collection_key:id);
-var G__24256 = cljs.core.partial.cljs$core$IFn$_invoke$arity$2(entitydb.core.insert_item_when_not_nil,schema).call(null,cljs.core.assoc_in((entitydb.core.remove_meta.cljs$core$IFn$_invoke$arity$3 ? entitydb.core.remove_meta.cljs$core$IFn$_invoke$arity$3(db,entity_kw,collection_key) : entitydb.core.remove_meta.call(null,db,entity_kw,collection_key)),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [entity_kw,cljs.core.cst$kw$c_DASH_one,collection_key], null),id),entity_kw,item);
-var G__24257 = entity_kw;
-var G__24258 = meta_key;
-var G__24259 = meta;
-return (entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4(G__24256,G__24257,G__24258,G__24259) : entitydb.core.insert_meta.call(null,G__24256,G__24257,G__24258,G__24259));
+var G__24181 = (function (){var G__24186 = cljs.core.assoc_in((entitydb.core.remove_meta.cljs$core$IFn$_invoke$arity$3 ? entitydb.core.remove_meta.cljs$core$IFn$_invoke$arity$3(db,entity_kw,collection_key) : entitydb.core.remove_meta.call(null,db,entity_kw,collection_key)),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [entity_kw,cljs.core.cst$kw$c_DASH_one,collection_key], null),id);
+var G__24187 = entity_kw;
+var G__24188 = item;
+var fexpr__24185 = cljs.core.partial.cljs$core$IFn$_invoke$arity$2(entitydb.core.insert_item_when_not_nil,schema);
+return (fexpr__24185.cljs$core$IFn$_invoke$arity$3 ? fexpr__24185.cljs$core$IFn$_invoke$arity$3(G__24186,G__24187,G__24188) : fexpr__24185.call(null,G__24186,G__24187,G__24188));
+})();
+var G__24182 = entity_kw;
+var G__24183 = meta_key;
+var G__24184 = meta;
+return (entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4(G__24181,G__24182,G__24183,G__24184) : entitydb.core.insert_meta.call(null,G__24181,G__24182,G__24183,G__24184));
 }
 });
 
@@ -182,23 +158,8 @@ entitydb.core.insert_named_item.cljs$lang$maxFixedArity = 6;
  *   
  */
 entitydb.core.insert_collection = (function entitydb$core$insert_collection(var_args){
-var args24264 = [];
-var len__11171__auto___24271 = arguments.length;
-var i__11172__auto___24272 = (0);
-while(true){
-if((i__11172__auto___24272 < len__11171__auto___24271)){
-args24264.push((arguments[i__11172__auto___24272]));
-
-var G__24273 = (i__11172__auto___24272 + (1));
-i__11172__auto___24272 = G__24273;
-continue;
-} else {
-}
-break;
-}
-
-var G__24266 = args24264.length;
-switch (G__24266) {
+var G__24191 = arguments.length;
+switch (G__24191) {
 case 5:
 return entitydb.core.insert_collection.cljs$core$IFn$_invoke$arity$5((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),(arguments[(3)]),(arguments[(4)]));
 
@@ -208,7 +169,7 @@ return entitydb.core.insert_collection.cljs$core$IFn$_invoke$arity$6((arguments[
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args24264.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });
@@ -223,16 +184,19 @@ return db;
 } else {
 var id_fn = entitydb.util.get_id_fn(schema,entity_kw);
 var ids = cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentVector.EMPTY,cljs.core.map.cljs$core$IFn$_invoke$arity$2(id_fn,data));
-return cljs.core.partial.cljs$core$IFn$_invoke$arity$2(cljs.core.reduce,((function (id_fn,ids){
+var G__24193 = (function (){var G__24195 = cljs.core.assoc_in(db,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [entity_kw,cljs.core.cst$kw$c_DASH_many,collection_key], null),ids);
+var G__24196 = entity_kw;
+var G__24197 = collection_key;
+var G__24198 = meta;
+return (entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4(G__24195,G__24196,G__24197,G__24198) : entitydb.core.insert_meta.call(null,G__24195,G__24196,G__24197,G__24198));
+})();
+var G__24194 = data;
+var fexpr__24192 = cljs.core.partial.cljs$core$IFn$_invoke$arity$2(cljs.core.reduce,((function (G__24193,G__24194,id_fn,ids){
 return (function (db__$1,item){
 return entitydb.core.insert_item.cljs$core$IFn$_invoke$arity$4(schema,db__$1,entity_kw,item);
-});})(id_fn,ids))
-).call(null,(function (){var G__24267 = cljs.core.assoc_in(db,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [entity_kw,cljs.core.cst$kw$c_DASH_many,collection_key], null),ids);
-var G__24268 = entity_kw;
-var G__24269 = collection_key;
-var G__24270 = meta;
-return (entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.insert_meta.cljs$core$IFn$_invoke$arity$4(G__24267,G__24268,G__24269,G__24270) : entitydb.core.insert_meta.call(null,G__24267,G__24268,G__24269,G__24270));
-})(),data);
+});})(G__24193,G__24194,id_fn,ids))
+);
+return (fexpr__24192.cljs$core$IFn$_invoke$arity$2 ? fexpr__24192.cljs$core$IFn$_invoke$arity$2(G__24193,G__24194) : fexpr__24192.call(null,G__24193,G__24194));
 }
 });
 
@@ -268,23 +232,8 @@ entitydb.core.insert_collection.cljs$lang$maxFixedArity = 6;
  *   
  */
 entitydb.core.append_collection = (function entitydb$core$append_collection(var_args){
-var args24275 = [];
-var len__11171__auto___24278 = arguments.length;
-var i__11172__auto___24279 = (0);
-while(true){
-if((i__11172__auto___24279 < len__11171__auto___24278)){
-args24275.push((arguments[i__11172__auto___24279]));
-
-var G__24280 = (i__11172__auto___24279 + (1));
-i__11172__auto___24279 = G__24280;
-continue;
-} else {
-}
-break;
-}
-
-var G__24277 = args24275.length;
-switch (G__24277) {
+var G__24201 = arguments.length;
+switch (G__24201) {
 case 5:
 return entitydb.core.append_collection.cljs$core$IFn$_invoke$arity$5((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),(arguments[(3)]),(arguments[(4)]));
 
@@ -294,7 +243,7 @@ return entitydb.core.append_collection.cljs$core$IFn$_invoke$arity$6((arguments[
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args24275.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });
@@ -344,23 +293,8 @@ entitydb.core.append_collection.cljs$lang$maxFixedArity = 6;
  *   
  */
 entitydb.core.prepend_collection = (function entitydb$core$prepend_collection(var_args){
-var args24282 = [];
-var len__11171__auto___24285 = arguments.length;
-var i__11172__auto___24286 = (0);
-while(true){
-if((i__11172__auto___24286 < len__11171__auto___24285)){
-args24282.push((arguments[i__11172__auto___24286]));
-
-var G__24287 = (i__11172__auto___24286 + (1));
-i__11172__auto___24286 = G__24287;
-continue;
-} else {
-}
-break;
-}
-
-var G__24284 = args24282.length;
-switch (G__24284) {
+var G__24204 = arguments.length;
+switch (G__24204) {
 case 5:
 return entitydb.core.prepend_collection.cljs$core$IFn$_invoke$arity$5((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),(arguments[(3)]),(arguments[(4)]));
 
@@ -370,7 +304,7 @@ return entitydb.core.prepend_collection.cljs$core$IFn$_invoke$arity$6((arguments
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args24282.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });
@@ -391,10 +325,10 @@ return cljs.core.assoc_in(db_with_items,c_path,cljs.core.remove.cljs$core$IFn$_i
 entitydb.core.prepend_collection.cljs$lang$maxFixedArity = 6;
 
 entitydb.core.insert_related = (function entitydb$core$insert_related(schema,db,relations,entity_kw,id,item){
-return cljs.core.reduce_kv((function (db__$1,relation_kw,p__24297){
-var vec__24298 = p__24297;
-var relation_type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24298,(0),null);
-var related_entity_kw = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24298,(1),null);
+return cljs.core.reduce_kv((function (db__$1,relation_kw,p__24206){
+var vec__24207 = p__24206;
+var relation_type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24207,(0),null);
+var related_entity_kw = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24207,(1),null);
 var collection_key = entitydb.relations.get_related_collection_key(entity_kw,id,relation_kw);
 var relation_data = (relation_kw.cljs$core$IFn$_invoke$arity$1 ? relation_kw.cljs$core$IFn$_invoke$arity$1(item) : relation_kw.call(null,item));
 var remove_collection_type_map = new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$one,cljs.core.cst$kw$c_DASH_one,cljs.core.cst$kw$many,cljs.core.cst$kw$c_DASH_many], null);
@@ -403,11 +337,11 @@ if(cljs.core.fn_QMARK_(relation_data)){
 return db__$1;
 } else {
 if((cljs.core.contains_QMARK_(item,relation_kw)) && ((relation_data == null))){
-var G__24301 = db__$1;
-var G__24302 = related_entity_kw;
-var G__24303 = (relation_type.cljs$core$IFn$_invoke$arity$1 ? relation_type.cljs$core$IFn$_invoke$arity$1(remove_collection_type_map) : relation_type.call(null,remove_collection_type_map));
-var G__24304 = collection_key;
-return (entitydb.core.remove_collection_or_named_item.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.remove_collection_or_named_item.cljs$core$IFn$_invoke$arity$4(G__24301,G__24302,G__24303,G__24304) : entitydb.core.remove_collection_or_named_item.call(null,G__24301,G__24302,G__24303,G__24304));
+var G__24210 = db__$1;
+var G__24211 = related_entity_kw;
+var G__24212 = (relation_type.cljs$core$IFn$_invoke$arity$1 ? relation_type.cljs$core$IFn$_invoke$arity$1(remove_collection_type_map) : relation_type.call(null,remove_collection_type_map));
+var G__24213 = collection_key;
+return (entitydb.core.remove_collection_or_named_item.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.remove_collection_or_named_item.cljs$core$IFn$_invoke$arity$4(G__24210,G__24211,G__24212,G__24213) : entitydb.core.remove_collection_or_named_item.call(null,G__24210,G__24211,G__24212,G__24213));
 } else {
 return (insert_collection_fn.cljs$core$IFn$_invoke$arity$5 ? insert_collection_fn.cljs$core$IFn$_invoke$arity$5(schema,db__$1,related_entity_kw,collection_key,relation_data) : insert_collection_fn.call(null,schema,db__$1,related_entity_kw,collection_key,relation_data));
 }
@@ -418,7 +352,7 @@ return (insert_collection_fn.cljs$core$IFn$_invoke$arity$5 ? insert_collection_f
  * Inserts meta data for an entity or collection into the store.
  */
 entitydb.core.insert_meta = (function entitydb$core$insert_meta(db,entity_kw,meta_key,meta){
-var schema = cljs.core.PersistentArrayMap.fromArray([entitydb.core.meta_store,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$id,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(entitydb.util.get_meta_id,entity_kw,meta_key)], null)], true, false);
+var schema = cljs.core.PersistentArrayMap.createAsIfByAssoc([entitydb.core.meta_store,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$id,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(entitydb.util.get_meta_id,entity_kw,meta_key)], null)]);
 if((meta == null)){
 return (entitydb.core.remove_meta.cljs$core$IFn$_invoke$arity$3 ? entitydb.core.remove_meta.cljs$core$IFn$_invoke$arity$3(db,entity_kw,meta_key) : entitydb.core.remove_meta.call(null,db,entity_kw,meta_key));
 } else {
@@ -426,10 +360,10 @@ return entitydb.core.insert_item.cljs$core$IFn$_invoke$arity$4(schema,entitydb.u
 }
 });
 entitydb.core.remove_item_id_from_named_items = (function entitydb$core$remove_item_id_from_named_items(collections,id){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentArrayMap.EMPTY,cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p__24309){
-var vec__24310 = p__24309;
-var key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24310,(0),null);
-var val = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24310,(1),null);
+return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentArrayMap.EMPTY,cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p__24214){
+var vec__24215 = p__24214;
+var key = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24215,(0),null);
+var val = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24215,(1),null);
 return cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(val,id);
 }),collections));
 });
@@ -546,9 +480,9 @@ return db;
 } else {
 var store = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [entitydb.core.meta_store,cljs.core.cst$kw$store], null));
 var store_without_item = cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(store,meta_key);
-return cljs.core.assoc_in(db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [entitydb.core.meta_store,cljs.core.cst$kw$store], null),(function (){var or__9992__auto__ = store_without_item;
-if(cljs.core.truth_(or__9992__auto__)){
-return or__9992__auto__;
+return cljs.core.assoc_in(db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [entitydb.core.meta_store,cljs.core.cst$kw$store], null),(function (){var or__11514__auto__ = store_without_item;
+if(cljs.core.truth_(or__11514__auto__)){
+return or__11514__auto__;
 } else {
 return cljs.core.PersistentArrayMap.EMPTY;
 }
@@ -562,11 +496,11 @@ entitydb.core.get_item_meta = (function entitydb$core$get_item_meta(schema,db,en
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(entity_kw,entitydb.core.meta_store)){
 return null;
 } else {
-var G__24317 = schema;
-var G__24318 = db;
-var G__24319 = entitydb.core.meta_store;
-var G__24320 = entitydb.util.get_meta_id(entity_kw,id);
-return (entitydb.core.get_item_by_id.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.get_item_by_id.cljs$core$IFn$_invoke$arity$4(G__24317,G__24318,G__24319,G__24320) : entitydb.core.get_item_by_id.call(null,G__24317,G__24318,G__24319,G__24320));
+var G__24218 = schema;
+var G__24219 = db;
+var G__24220 = entitydb.core.meta_store;
+var G__24221 = entitydb.util.get_meta_id(entity_kw,id);
+return (entitydb.core.get_item_by_id.cljs$core$IFn$_invoke$arity$4 ? entitydb.core.get_item_by_id.cljs$core$IFn$_invoke$arity$4(G__24218,G__24219,G__24220,G__24221) : entitydb.core.get_item_by_id.call(null,G__24218,G__24219,G__24220,G__24221));
 }
 });
 /**
@@ -582,13 +516,13 @@ return entitydb.core.get_item_meta(schema,db,entity_kw,meta_key);
  */
 entitydb.core.get_collection_meta = entitydb.core.get_item_meta;
 entitydb.core.get_related_items_fn = (function entitydb$core$get_related_items_fn(schema,db,entity_kw,id){
-return (function (item,relation_kw,p__24325){
-var vec__24326 = p__24325;
-var relation_type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24326,(0),null);
-var related_entity_kw = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24326,(1),null);
+return (function (item,relation_kw,p__24222){
+var vec__24223 = p__24222;
+var relation_type = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24223,(0),null);
+var related_entity_kw = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__24223,(1),null);
 var collection_key = entitydb.relations.get_related_collection_key(entity_kw,id,relation_kw);
 var get_collection_fn = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(relation_type,cljs.core.cst$kw$one))?entitydb.core.get_named_item:entitydb.core.get_collection);
-var data_fn = cljs.core.partial.cljs$core$IFn$_invoke$arity$variadic(get_collection_fn,schema,db,related_entity_kw,cljs.core.array_seq([collection_key], 0));
+var data_fn = cljs.core.partial.cljs$core$IFn$_invoke$arity$variadic(get_collection_fn,schema,db,related_entity_kw,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([collection_key], 0));
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(item,relation_kw,data_fn);
 });
 });
@@ -601,7 +535,10 @@ var item = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(db,new cljs.core.Persi
 if((item == null)){
 return null;
 } else {
-return cljs.core.partial.cljs$core$IFn$_invoke$arity$2(cljs.core.reduce_kv,entitydb.core.get_related_items_fn(schema,db,entity_kw,id)).call(null,cljs.core.with_meta(item,entitydb.core.get_item_meta(schema,db,entity_kw,id)),relations);
+var G__24227 = cljs.core.with_meta(item,entitydb.core.get_item_meta(schema,db,entity_kw,id));
+var G__24228 = relations;
+var fexpr__24226 = cljs.core.partial.cljs$core$IFn$_invoke$arity$2(cljs.core.reduce_kv,entitydb.core.get_related_items_fn(schema,db,entity_kw,id));
+return (fexpr__24226.cljs$core$IFn$_invoke$arity$2 ? fexpr__24226.cljs$core$IFn$_invoke$arity$2(G__24227,G__24228) : fexpr__24226.call(null,G__24227,G__24228));
 }
 });
 /**
@@ -637,23 +574,8 @@ return cljs.core.with_meta(cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.cor
  *   only entity ids but this function will return an entity based on the id.
  */
 entitydb.core.get_named_item = (function entitydb$core$get_named_item(var_args){
-var args24329 = [];
-var len__11171__auto___24332 = arguments.length;
-var i__11172__auto___24333 = (0);
-while(true){
-if((i__11172__auto___24333 < len__11171__auto___24332)){
-args24329.push((arguments[i__11172__auto___24333]));
-
-var G__24334 = (i__11172__auto___24333 + (1));
-i__11172__auto___24333 = G__24334;
-continue;
-} else {
-}
-break;
-}
-
-var G__24331 = args24329.length;
-switch (G__24331) {
+var G__24230 = arguments.length;
+switch (G__24230) {
 case 4:
 return entitydb.core.get_named_item.cljs$core$IFn$_invoke$arity$4((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),(arguments[(3)]));
 
@@ -663,7 +585,7 @@ return entitydb.core.get_named_item.cljs$core$IFn$_invoke$arity$5((arguments[(0)
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args24329.length)].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Invalid arity: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
 
 }
 });

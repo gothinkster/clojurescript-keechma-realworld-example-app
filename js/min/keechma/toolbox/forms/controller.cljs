@@ -131,7 +131,7 @@
                 (if (should-immediately-validate? attr-valid? element)
                   (mark-dirty-and-validate form-record new-state)
                   new-state))
-     (when (and element formatter caret-pos)
+     (if (and element formatter caret-pos)
        (fn []
          (cursor/set-caret-pos! element
                                 (:format-chars (meta formatter))
@@ -139,7 +139,8 @@
                                 formatted-value
                                 (formatter old-value nil)
                                 caret-pos)
-         (reagent/flush)))]))
+         (reagent/flush))
+       reagent/flush)]))
 
 (defn handle-on-blur [app-db forms-config [form-props path]]
   (let [form-state (get-form-state app-db form-props)
@@ -181,7 +182,7 @@
         form-record (get-form-record forms-config form-props)
         processed-data (core/process-out form-record app-db form-props (:data form-state))]
     (promise-or-pipeline
-     (core/submit-data form-record app-db form-props processed-data)
+     (core/update-data form-record app-db form-props processed-data)
      #(assoc data :result %1))))
 
 (defn handle-on-update-success [app-db forms-config value]
@@ -260,7 +261,10 @@
 
 
 (defn make-controller [forms-config]
-  (pp-controller/constructor (fn [] true) (actions forms-config)))
+  (let [ctrl (pp-controller/constructor (fn [] true) {})
+        context (:context ctrl)
+        forms-config-with-context (reduce-kv (fn [m k v] (assoc m k (assoc v :context context))) {} forms-config)]
+    (assoc ctrl :pipelines (actions forms-config-with-context))))
 
 (defn register
   ([forms-config] (register {} forms-config))

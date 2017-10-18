@@ -7,6 +7,8 @@
 
 (def id-key ::dataloader)
 
+(defrecord EntityDBWithRelations [data relations])
+
 (defn target->edb [target]
   [(keyword (namespace target))
    (keyword (name target))])
@@ -14,20 +16,37 @@
 (defn save-kv-data [app-db target data]
   (assoc-in app-db target data))
 
+(defn insert-relations [edb-schema edb relations]
+  (reduce-kv (fn [acc k v]
+               (let [items (if (map? v) [v] v)]
+                 (reduce (fn [acc2 item]
+                           (edb/insert-item edb-schema acc2 k item))
+                         acc items))) edb relations))
+
 (defn save-edb-named-item [app-db edb-schema target data]
   (let [edb (:entity-db app-db)
-        [entity named-item] (target->edb target)]
+        [entity named-item] (target->edb target)
+        insert-named-item (partial edb/insert-named-item edb-schema)
+        [data relations] (if (= EntityDBWithRelations (type data))
+                           [(:data data) (:relations data)]
+                           [data nil])]
     (assoc app-db :entity-db
            (if data
-             (edb/insert-named-item edb-schema edb entity named-item data)
+             (-> (insert-relations edb-schema edb relations)
+                 (insert-named-item entity named-item data))
              (edb/remove-named-item edb entity named-item)))))
 
 (defn save-edb-collection [app-db edb-schema target data]
   (let [edb (:entity-db app-db)
-        [entity collection] (target->edb target)]
+        [entity collection] (target->edb target)
+        insert-collection (partial edb/insert-collection edb-schema)
+        [data relations] (if (= EntityDBWithRelations (type data))
+                           [(:data data) (:relations data)]
+                           [data nil])]
     (assoc app-db :entity-db
            (if (seq data)
-             (edb/insert-collection edb-schema edb entity collection data)
+             (-> (insert-relations edb-schema edb relations)
+                 (insert-collection entity collection data))
              (edb/remove-collection edb entity collection)))))
 
 (defn get-edb-named-item [app-db edb-schema target]
@@ -90,11 +109,11 @@
                                  :app-db app-db
                                  :target target})))))))))
 
-(defn start-loaders! [app-db-atom app-datasources datasources results-chan edb-schema]
+(defn start-loaders! [app-db-atom app-datasources datasources results-chan edb-schema context]
   (let [app-db @app-db-atom
         loaders (datasources->loaders app-datasources datasources app-db results-chan edb-schema)]
     (doseq [[loader pending-datasources] loaders]
-      (let [promises (loader pending-datasources)]
+      (let [promises (loader pending-datasources context)]
         (doseq [[idx loader-promise] (map-indexed vector promises)]
           (->> (p/promise loader-promise)
                (p/map (fn [value]
@@ -126,7 +145,7 @@
                             :prev (merge {:value nil :status nil :error nil :params nil} (:prev payload))})
                 (save-data edb-schema (:target payload) res-data)))))
 
-(defn start-dependent-loaders! [app-db-atom app-datasources datasources results-chan edb-schema]
+(defn start-dependent-loaders! [app-db-atom app-datasources datasources results-chan edb-schema context]
   (let [app-db @app-db-atom
         statuses (reduce (fn [acc datasource-key]
                            (assoc acc datasource-key (:status (get-meta app-db datasource-key))))
@@ -138,7 +157,7 @@
                                (assoc acc datasource-key val)
                                acc))
                            {} datasources)]
-    (start-loaders! app-db-atom app-datasources fulfilled results-chan edb-schema)))
+    (start-loaders! app-db-atom app-datasources fulfilled results-chan edb-schema context)))
 
 (defn store-datasource-error! [app-db edb-schema payload]
   (let [datasource-key (:datasource payload)]
@@ -224,7 +243,7 @@
             (dep/graph) datasources)
          g-nodes (dep/nodes g)
          independent (filter #(not (contains? g-nodes %)) (keys datasources))]
-     (fn [app-db-atom]
+     (fn [app-db-atom context]
        (p/promise
         (fn [resolve reject on-cancel]
           (let [running? (atom true) 
@@ -235,7 +254,7 @@
             (when (fn? on-cancel) (on-cancel #(swap! running? not)))
 
             (mark-pending! app-db-atom  edb-schema (select-keys datasources (filter #(:reload? (get plan %)) (keys plan))))
-            (start-loaders! app-db-atom datasources (select-keys datasources start-nodes) results-chan edb-schema)
+            (start-loaders! app-db-atom datasources (select-keys datasources start-nodes) results-chan edb-schema context)
             (go-loop []
               (if @running?
                 (if (has-pending-datasources? @app-db-atom)
@@ -244,7 +263,7 @@
                     (case status
                       :ok (do
                             (store-datasource! app-db-atom edb-schema payload)
-                            (start-dependent-loaders! app-db-atom datasources (select-keys datasources t-dependents) results-chan edb-schema))
+                            (start-dependent-loaders! app-db-atom datasources (select-keys datasources t-dependents) results-chan edb-schema context))
                       :error (reset! app-db-atom
                                      (-> @app-db-atom
                                          (store-datasource-error! edb-schema payload)

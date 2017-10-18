@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('forms.util');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('clojure.string');
 forms.util.keyword_or_integer = (function forms$util$keyword_or_integer(key){
 if((key instanceof cljs.core.Keyword)){
@@ -27,19 +28,19 @@ return cljs.core.vec(cljs.core.map.cljs$core$IFn$_invoke$arity$2(forms.util.keyw
  *   nested structure. keys is a sequence of keys. Any empty maps that result
  *   will not be present in the new structure.
  */
-forms.util.dissoc_in = (function forms$util$dissoc_in(m,p__21608){
-var vec__21612 = p__21608;
-var seq__21613 = cljs.core.seq(vec__21612);
-var first__21614 = cljs.core.first(seq__21613);
-var seq__21613__$1 = cljs.core.next(seq__21613);
-var k = first__21614;
-var ks = seq__21613__$1;
-var keys = vec__21612;
+forms.util.dissoc_in = (function forms$util$dissoc_in(m,p__21400){
+var vec__21401 = p__21400;
+var seq__21402 = cljs.core.seq(vec__21401);
+var first__21403 = cljs.core.first(seq__21402);
+var seq__21402__$1 = cljs.core.next(seq__21402);
+var k = first__21403;
+var ks = seq__21402__$1;
+var keys = vec__21401;
 if(ks){
-var temp__6751__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,k);
-if(cljs.core.truth_(temp__6751__auto__)){
-var nextmap = temp__6751__auto__;
-var newmap = forms$util$dissoc_in(nextmap,ks);
+var temp__5276__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,k);
+if(cljs.core.truth_(temp__5276__auto__)){
+var nextmap = temp__5276__auto__;
+var newmap = (forms.util.dissoc_in.cljs$core$IFn$_invoke$arity$2 ? forms.util.dissoc_in.cljs$core$IFn$_invoke$arity$2(nextmap,ks) : forms.util.dissoc_in.call(null,nextmap,ks));
 if(cljs.core.seq(newmap)){
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,newmap);
 } else {

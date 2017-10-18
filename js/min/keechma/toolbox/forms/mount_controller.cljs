@@ -5,6 +5,8 @@
             [clojure.set :as set])
   (:require-macros [cljs.core.async.macros :refer [go-loop]]))
 
+(defrecord Controller [forms-params])
+
 (defn forms-for-route [route forms-params]
   (map (fn [[form params-fn]]
          (when-let [id (params-fn route)]
@@ -25,22 +27,20 @@
 (defn get-mounted-forms [app-db]
   (set (get-in app-db [:kv id-key :order])))
 
-(defrecord Controller [forms-params]
-  controller/IController
-  (params [this route]
-    (:data route))
-  (start [this params app-db]
-    (controller/execute this :mount-forms params)
-    app-db)
-  (handler [this app-db-atom in-chan out-chan]
-    (go-loop []
-      (let [[command args] (<! in-chan)]
-        (case command
-          :mount-forms (mount-forms this args (get-mounted-forms @app-db-atom))
-          :route-changed (mount-forms this (:data args) (get-mounted-forms @app-db-atom))
-          nil)
-        (when command
-          (recur))))))
+(defmethod controller/params Controller [this route]
+  (:data route))
+(defmethod controller/start Controller [this params app-db]
+  (controller/execute this :mount-forms params)
+  app-db)
+(defmethod controller/handler Controller [this app-db-atom in-chan out-chan]
+  (go-loop []
+    (let [[command args] (<! in-chan)]
+      (case command
+        :mount-forms (mount-forms this args (get-mounted-forms @app-db-atom))
+        :route-changed (mount-forms this (:data args) (get-mounted-forms @app-db-atom))
+        nil)
+      (when command
+        (recur)))))
 
 (defn constructor [form-params]
   (->Controller form-params))

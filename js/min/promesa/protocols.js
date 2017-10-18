@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('promesa.protocols');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 
 /**
  * A basic future abstraction.
@@ -15,14 +16,14 @@ promesa.protocols._map = (function promesa$protocols$_map(_,callback){
 if((!((_ == null))) && (!((_.promesa$protocols$IPromise$_map$arity$2 == null)))){
 return _.promesa$protocols$IPromise$_map$arity$2(_,callback);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._map[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$2 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$2(_,callback) : m__10706__auto__.call(null,_,callback));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._map[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$2 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$2(_,callback) : m__12248__auto__.call(null,_,callback));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._map["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$2 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$2(_,callback) : m__10706__auto____$1.call(null,_,callback));
+var m__12248__auto____$1 = (promesa.protocols._map["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$2 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$2(_,callback) : m__12248__auto____$1.call(null,_,callback));
 } else {
 throw cljs.core.missing_protocol("IPromise.-map",_);
 }
@@ -37,14 +38,14 @@ promesa.protocols._bind = (function promesa$protocols$_bind(_,callback){
 if((!((_ == null))) && (!((_.promesa$protocols$IPromise$_bind$arity$2 == null)))){
 return _.promesa$protocols$IPromise$_bind$arity$2(_,callback);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._bind[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$2 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$2(_,callback) : m__10706__auto__.call(null,_,callback));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._bind[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$2 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$2(_,callback) : m__12248__auto__.call(null,_,callback));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._bind["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$2 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$2(_,callback) : m__10706__auto____$1.call(null,_,callback));
+var m__12248__auto____$1 = (promesa.protocols._bind["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$2 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$2(_,callback) : m__12248__auto____$1.call(null,_,callback));
 } else {
 throw cljs.core.missing_protocol("IPromise.-bind",_);
 }
@@ -59,14 +60,14 @@ promesa.protocols._catch = (function promesa$protocols$_catch(_,callback){
 if((!((_ == null))) && (!((_.promesa$protocols$IPromise$_catch$arity$2 == null)))){
 return _.promesa$protocols$IPromise$_catch$arity$2(_,callback);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._catch[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$2 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$2(_,callback) : m__10706__auto__.call(null,_,callback));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._catch[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$2 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$2(_,callback) : m__12248__auto__.call(null,_,callback));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._catch["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$2 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$2(_,callback) : m__10706__auto____$1.call(null,_,callback));
+var m__12248__auto____$1 = (promesa.protocols._catch["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$2 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$2(_,callback) : m__12248__auto____$1.call(null,_,callback));
 } else {
 throw cljs.core.missing_protocol("IPromise.-catch",_);
 }
@@ -88,14 +89,14 @@ promesa.protocols._extract = (function promesa$protocols$_extract(_){
 if((!((_ == null))) && (!((_.promesa$protocols$IState$_extract$arity$1 == null)))){
 return _.promesa$protocols$IState$_extract$arity$1(_);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._extract[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto__.call(null,_));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._extract[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto__.call(null,_));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._extract["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto____$1.call(null,_));
+var m__12248__auto____$1 = (promesa.protocols._extract["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto____$1.call(null,_));
 } else {
 throw cljs.core.missing_protocol("IState.-extract",_);
 }
@@ -110,14 +111,14 @@ promesa.protocols._resolved_QMARK_ = (function promesa$protocols$_resolved_QMARK
 if((!((_ == null))) && (!((_.promesa$protocols$IState$_resolved_QMARK_$arity$1 == null)))){
 return _.promesa$protocols$IState$_resolved_QMARK_$arity$1(_);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._resolved_QMARK_[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto__.call(null,_));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._resolved_QMARK_[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto__.call(null,_));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._resolved_QMARK_["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto____$1.call(null,_));
+var m__12248__auto____$1 = (promesa.protocols._resolved_QMARK_["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto____$1.call(null,_));
 } else {
 throw cljs.core.missing_protocol("IState.-resolved?",_);
 }
@@ -132,14 +133,14 @@ promesa.protocols._rejected_QMARK_ = (function promesa$protocols$_rejected_QMARK
 if((!((_ == null))) && (!((_.promesa$protocols$IState$_rejected_QMARK_$arity$1 == null)))){
 return _.promesa$protocols$IState$_rejected_QMARK_$arity$1(_);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._rejected_QMARK_[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto__.call(null,_));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._rejected_QMARK_[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto__.call(null,_));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._rejected_QMARK_["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto____$1.call(null,_));
+var m__12248__auto____$1 = (promesa.protocols._rejected_QMARK_["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto____$1.call(null,_));
 } else {
 throw cljs.core.missing_protocol("IState.-rejected?",_);
 }
@@ -154,14 +155,14 @@ promesa.protocols._pending_QMARK_ = (function promesa$protocols$_pending_QMARK_(
 if((!((_ == null))) && (!((_.promesa$protocols$IState$_pending_QMARK_$arity$1 == null)))){
 return _.promesa$protocols$IState$_pending_QMARK_$arity$1(_);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._pending_QMARK_[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto__.call(null,_));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._pending_QMARK_[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto__.call(null,_));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._pending_QMARK_["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto____$1.call(null,_));
+var m__12248__auto____$1 = (promesa.protocols._pending_QMARK_["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto____$1.call(null,_));
 } else {
 throw cljs.core.missing_protocol("IState.-pending?",_);
 }
@@ -183,14 +184,14 @@ promesa.protocols._promise = (function promesa$protocols$_promise(_){
 if((!((_ == null))) && (!((_.promesa$protocols$IPromiseFactory$_promise$arity$1 == null)))){
 return _.promesa$protocols$IPromiseFactory$_promise$arity$1(_);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._promise[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto__.call(null,_));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._promise[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto__.call(null,_));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._promise["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto____$1.call(null,_));
+var m__12248__auto____$1 = (promesa.protocols._promise["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto____$1.call(null,_));
 } else {
 throw cljs.core.missing_protocol("IPromiseFactory.-promise",_);
 }
@@ -209,14 +210,14 @@ promesa.protocols._cancel = (function promesa$protocols$_cancel(_){
 if((!((_ == null))) && (!((_.promesa$protocols$ICancellable$_cancel$arity$1 == null)))){
 return _.promesa$protocols$ICancellable$_cancel$arity$1(_);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._cancel[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto__.call(null,_));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._cancel[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto__.call(null,_));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._cancel["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto____$1.call(null,_));
+var m__12248__auto____$1 = (promesa.protocols._cancel["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto____$1.call(null,_));
 } else {
 throw cljs.core.missing_protocol("ICancellable.-cancel",_);
 }
@@ -228,14 +229,14 @@ promesa.protocols._cancelled_QMARK_ = (function promesa$protocols$_cancelled_QMA
 if((!((_ == null))) && (!((_.promesa$protocols$ICancellable$_cancelled_QMARK_$arity$1 == null)))){
 return _.promesa$protocols$ICancellable$_cancelled_QMARK_$arity$1(_);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._cancelled_QMARK_[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto__.call(null,_));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._cancelled_QMARK_[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto__.call(null,_));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._cancelled_QMARK_["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__10706__auto____$1.call(null,_));
+var m__12248__auto____$1 = (promesa.protocols._cancelled_QMARK_["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$1(_) : m__12248__auto____$1.call(null,_));
 } else {
 throw cljs.core.missing_protocol("ICancellable.-cancelled?",_);
 }
@@ -257,14 +258,14 @@ promesa.protocols._schedule = (function promesa$protocols$_schedule(_,ms,func){
 if((!((_ == null))) && (!((_.promesa$protocols$IScheduler$_schedule$arity$3 == null)))){
 return _.promesa$protocols$IScheduler$_schedule$arity$3(_,ms,func);
 } else {
-var x__10705__auto__ = (((_ == null))?null:_);
-var m__10706__auto__ = (promesa.protocols._schedule[goog.typeOf(x__10705__auto__)]);
-if(!((m__10706__auto__ == null))){
-return (m__10706__auto__.cljs$core$IFn$_invoke$arity$3 ? m__10706__auto__.cljs$core$IFn$_invoke$arity$3(_,ms,func) : m__10706__auto__.call(null,_,ms,func));
+var x__12247__auto__ = (((_ == null))?null:_);
+var m__12248__auto__ = (promesa.protocols._schedule[goog.typeOf(x__12247__auto__)]);
+if(!((m__12248__auto__ == null))){
+return (m__12248__auto__.cljs$core$IFn$_invoke$arity$3 ? m__12248__auto__.cljs$core$IFn$_invoke$arity$3(_,ms,func) : m__12248__auto__.call(null,_,ms,func));
 } else {
-var m__10706__auto____$1 = (promesa.protocols._schedule["_"]);
-if(!((m__10706__auto____$1 == null))){
-return (m__10706__auto____$1.cljs$core$IFn$_invoke$arity$3 ? m__10706__auto____$1.cljs$core$IFn$_invoke$arity$3(_,ms,func) : m__10706__auto____$1.call(null,_,ms,func));
+var m__12248__auto____$1 = (promesa.protocols._schedule["_"]);
+if(!((m__12248__auto____$1 == null))){
+return (m__12248__auto____$1.cljs$core$IFn$_invoke$arity$3 ? m__12248__auto____$1.cljs$core$IFn$_invoke$arity$3(_,ms,func) : m__12248__auto____$1.call(null,_,ms,func));
 } else {
 throw cljs.core.missing_protocol("IScheduler.-schedule",_);
 }

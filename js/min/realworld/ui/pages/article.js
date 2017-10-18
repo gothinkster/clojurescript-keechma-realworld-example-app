@@ -1,11 +1,14 @@
-// Compiled by ClojureScript 1.9.229 {:static-fns true, :optimize-constants true, :elide-asserts true}
+// Compiled by ClojureScript 1.9.854 {:static-fns true, :optimize-constants true, :elide-asserts true}
 goog.provide('realworld.ui.pages.article');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('keechma.ui_component');
 goog.require('keechma.toolbox.ui');
 goog.require('realworld.util');
 realworld.ui.pages.article.render_article_meta = (function realworld$ui$pages$article$render_article_meta(ctx,article){
-var author = cljs.core.cst$kw$author.cljs$core$IFn$_invoke$arity$1(article).call(null);
+var author = (function (){var fexpr__22494 = cljs.core.cst$kw$author.cljs$core$IFn$_invoke$arity$1(article);
+return (fexpr__22494.cljs$core$IFn$_invoke$arity$0 ? fexpr__22494.cljs$core$IFn$_invoke$arity$0() : fexpr__22494.call(null));
+})();
 var current_user = keechma.toolbox.ui.sub_GT_(ctx,cljs.core.cst$kw$current_DASH_user);
 var current_user_author_QMARK_ = cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(author,current_user);
 return new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div$article_DASH_meta,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$a,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$href,keechma.ui_component.url(ctx,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$page,"profile",cljs.core.cst$kw$subpage,cljs.core.cst$kw$username.cljs$core$IFn$_invoke$arity$1(author)], null))], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$src,cljs.core.cst$kw$image.cljs$core$IFn$_invoke$arity$1(author)], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div$info,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$a$author,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$href,keechma.ui_component.url(ctx,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$page,"profile",cljs.core.cst$kw$subpage,cljs.core.cst$kw$username.cljs$core$IFn$_invoke$arity$1(author)], null))], null),cljs.core.cst$kw$username.cljs$core$IFn$_invoke$arity$1(author)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span$date,realworld.util.format_date.cljs$core$IFn$_invoke$arity$1(cljs.core.cst$kw$createdAt.cljs$core$IFn$_invoke$arity$1(article))], null)], null),((current_user_author_QMARK_)?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$a$btn$btn_DASH_outline_DASH_secondary$btn_DASH_sm,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$href,keechma.ui_component.url(ctx,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$page,"editor",cljs.core.cst$kw$subpage,cljs.core.cst$kw$slug.cljs$core$IFn$_invoke$arity$1(article)], null))], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$i$ion_DASH_edit], null)," Edit Article"], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [keechma.ui_component.component(ctx,cljs.core.cst$kw$follow_DASH_button),author], null))," ",((current_user_author_QMARK_)?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [keechma.ui_component.component(ctx,cljs.core.cst$kw$delete_DASH_button),article], null):new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [keechma.ui_component.component(ctx,cljs.core.cst$kw$favorite_DASH_button),article,cljs.core.cst$kw$big], null))], null);
@@ -17,7 +20,9 @@ realworld.ui.pages.article.render_tags = (function realworld$ui$pages$article$re
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$ul$tag_DASH_list,cljs.core.doall.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (t){
 var tag = cljs.core.cst$kw$tag.cljs$core$IFn$_invoke$arity$1(t);
 return cljs.core.with_meta(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$li$tag_DASH_default$tag_DASH_pill$tag_DASH_outline,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$a,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$href,keechma.ui_component.url(ctx,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$page,"home",cljs.core.cst$kw$subpage,"tag",cljs.core.cst$kw$detail,tag], null))], null),tag], null)], null),new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$key,tag], null));
-}),cljs.core.cst$kw$tagList.cljs$core$IFn$_invoke$arity$1(article).call(null)))], null);
+}),(function (){var fexpr__22495 = cljs.core.cst$kw$tagList.cljs$core$IFn$_invoke$arity$1(article);
+return (fexpr__22495.cljs$core$IFn$_invoke$arity$0 ? fexpr__22495.cljs$core$IFn$_invoke$arity$0() : fexpr__22495.call(null));
+})()))], null);
 });
 realworld.ui.pages.article.render = (function realworld$ui$pages$article$render(ctx){
 var article = keechma.toolbox.ui.sub_GT_(ctx,cljs.core.cst$kw$current_DASH_article);
