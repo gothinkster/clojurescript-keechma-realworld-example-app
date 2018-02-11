@@ -1,10 +1,10 @@
 (defproject realworld "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.9.0-alpha17"]
-                 [org.clojure/clojurescript "1.9.854"]
-                 [reagent "0.6.1"]
-                 [keechma "0.3.0" :exclusions [cljsjs/react-with-addons]]
-                 [keechma/toolbox "0.1.0" :exclusions [keechma/entitydb]]
-                 [keechma/entitydb "0.1.1"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.9.946"]
+                 [reagent "0.7.0"]
+                 [keechma "0.3.2" :exclusions [cljsjs/react-with-addons]]
+                 [keechma/toolbox "0.1.8" :exclusions [keechma/entitydb]]
+                 [keechma/entitydb "0.1.4"]
                  [cljsjs/moment "2.17.1-1"]
                  [cljsjs/marked "0.3.5-0"]
                  [hodgepodge "0.1.3"]]
@@ -13,7 +13,7 @@
 
   :source-paths ["src/clj"]
 
-  :plugins [[lein-cljsbuild "1.1.4"]]
+  :plugins [[lein-cljsbuild "1.1.7"]]
 
   :clean-targets ^{:protect false} ["resources/public/js"
                                     "target"
@@ -25,7 +25,7 @@
   {:dev
    {:dependencies []
 
-    :plugins      [[lein-figwheel "0.5.10"]
+    :plugins      [[lein-figwheel "0.5.14"]
                    [lein-doo "0.1.7"]]
     }}
 
