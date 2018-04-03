@@ -12,7 +12,7 @@
    :editor   (editor/constructor)
    :comment  (comment/constructor)})
 
-(def forms-ids
+(def forms-automount-fns
   {:login (fn [{:keys [page]}]
             (when (= "login" page)
               :form))
