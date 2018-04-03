@@ -4,26 +4,22 @@
             [keechma.toolbox.forms.helpers :as forms-helpers]
             [keechma.toolbox.forms.core :as forms-core]
             [realworld.ui.components.pure.form-inputs :refer [controlled-input]]
-            [realworld.ui.components.pure.form-api-errors :as form-api-errors]))
+            [realworld.ui.components.pure.form-api-errors :as form-api-errors]
+            [keechma.toolbox.forms.ui :as forms-ui]))
 
 
 (defn render [ctx]
-  (let [form-id [:login :form]
-        form-state @(forms-helpers/form-state ctx form-id)
-        helpers (forms-helpers/make-component-helpers ctx form-id)]
+  (let [form-props [:login :form]
+        form-state (forms-ui/form-state> ctx form-props)]
     [:div.auth-page>div.container.page>div.row>div.col-md-6.offset-md-3.col-xs-12
      [:h1.text-xs-center "Sign in"]
      [:p.text-xs-center
       [:a {:href (ui/url ctx {:page "register"})} "Need an account?"]]
      [form-api-errors/render form-state]
-     [:form {:on-submit (:submit helpers)}
-      [controlled-input
-       {:form-state form-state :helpers helpers :placeholder "Email" :attr :email}]
-      [controlled-input
-       {:form-state form-state :helpers helpers :placeholder "Password" :attr :password :input-type :password}]
+     [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
+      [controlled-input ctx form-props :email {:placeholder "Email"}]
+      [controlled-input ctx form-props :password {:placeholder "Password" :input-type :password}]
       [:button.btn.btn-lg.btn-primary.pull-xs-right "Sign in"]]]))
 
 (def component
-  (ui/constructor {:renderer render
-                   :topic forms-core/id-key
-                   :subscription-deps [:form-state]}))
+  (ui/constructor {:renderer render}))

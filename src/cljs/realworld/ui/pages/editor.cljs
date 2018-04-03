@@ -5,7 +5,8 @@
             [keechma.toolbox.forms.core :as forms-core]
             [realworld.ui.components.pure.form-inputs :refer [controlled-input controlled-textarea]]
             [realworld.ui.components.pure.form-api-errors :as form-api-errors]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [keechma.toolbox.forms.ui :as forms-ui]))
 
 (defn tag-list [form-state]
   (let [tags (-> (get-in form-state [:data :tags])
@@ -14,20 +15,15 @@
     (set (filter (complement empty?) (map str/trim tags)))))
 
 (defn render [ctx]
-  (let [form-id [:editor (or (:subpage (route> ctx)) :new)]
-        form-state @(forms-helpers/form-state ctx form-id)
-        helpers (forms-helpers/make-component-helpers ctx form-id)]
+  (let [form-props [:editor (or (:subpage (route> ctx)) :new)]
+        form-state (forms-ui/form-state> ctx form-props)]
     [:div.auth-page>div.container.page>div.row>div.col-md-10.offset-md-1.col-xs-12
      [form-api-errors/render form-state]
-     [:form {:on-submit (:submit helpers)}
-      [controlled-input
-       {:form-state form-state :helpers helpers :placeholder "Article Title" :attr :title}]
-      [controlled-input
-       {:form-state form-state :helpers helpers :placeholder "What's this article about?" :attr :description}] 
-      [controlled-textarea
-       {:form-state form-state :helpers helpers :placeholder "Write your article (in markdown)" :attr :body}]
-      [controlled-input
-       {:form-state form-state :helpers helpers :placeholder "Enter tags" :attr :tags}]
+     [:form {:on-submit #(forms-ui/<submit ctx form-props %)}
+      [controlled-input ctx form-props :title {:placeholder "Article Title"}]
+      [controlled-input ctx form-props :description {:placeholder "What's this article about?"}] 
+      [controlled-textarea ctx form-props :body {:placeholder "Write your article (in markdown)"}]
+      [controlled-input ctx form-props :tags {:placeholder "Enter tags"}]
       [:div
        [:ul.tag-list
         (doall (map (fn [t]
@@ -37,6 +33,4 @@
       [:button.btn.btn-lg.btn-primary.pull-xs-right "Publish Article"]]]))
 
 (def component
-  (ui/constructor {:renderer render
-                   :topic forms-core/id-key
-                   :subscription-deps [:form-state]}))
+  (ui/constructor {:renderer render}))
