@@ -26,3 +26,4 @@ out
 .cpcache
 .shadow-cljs
 .iml
+public/js
