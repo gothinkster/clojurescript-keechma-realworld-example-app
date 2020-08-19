@@ -9,7 +9,8 @@
             ["react-dom" :as rdom]
             [app.ui.components.inputs :refer [wrapped-input]]
             [keechma.next.controllers.router :as router]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [app.ui.components.form-errors :refer [FormErrors]]))
 
 
 (defn tag-list
@@ -33,6 +34,7 @@
           {:class "row"}
           (d/div
             {:class "col-md-10 offset-md-1 col-xs-12"}
+            ($ FormErrors {:controller :register-form})
             (d/form
               {:on-submit (fn [e]
                             (.preventDefault e)

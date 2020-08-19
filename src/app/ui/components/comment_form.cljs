@@ -8,25 +8,28 @@
             ["react-dom" :as rdom]
             [app.ui.components.inputs :refer [wrapped-input]]
             [keechma.next.controllers.router :as router]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [app.ui.components.form-errors :refer [FormErrors]]))
 
 (defnc
   CommentFormRenderer
   [props]
   (let [current-user (use-sub props :current-user)]
-    (d/form
-      {:class "card comment-form",
-       :on-submit (fn [e]
-                    (.preventDefault e)
-                    (dispatch props :comment-form :keechma.form/submit))}
-      (d/div {:class "card-block"}
-             (wrapped-input {:keechma.form/controller :comment-form,
-                             :input/type :textarea,
-                             :input/attr :body,
-                             :rows 3,
-                             :placeholder "Write a comment ..."}))
-      (d/div {:class "card-footer"}
-             (d/img {:class "comment-author-img", :src (:image current-user)})
-             (d/button {:class "btn btn-sm btn-primary"} "Post Comment")))))
+    (<>
+      ($ FormErrors {:controller :current-user})
+      (d/form
+        {:class "card comment-form",
+         :on-submit (fn [e]
+                      (.preventDefault e)
+                      (dispatch props :comment-form :keechma.form/submit))}
+        (d/div {:class "card-block"}
+               (wrapped-input {:keechma.form/controller :comment-form,
+                               :input/type :textarea,
+                               :input/attr :body,
+                               :rows 3,
+                               :placeholder "Write a comment ..."}))
+        (d/div {:class "card-footer"}
+               (d/img {:class "comment-author-img", :src (:image current-user)})
+               (d/button {:class "btn btn-sm btn-primary"} "Post Comment"))))))
 
 (def CommentForm (with-keechma CommentFormRenderer))

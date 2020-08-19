@@ -85,9 +85,12 @@
             :user-actions #:keechma.controller{:type :user/user-actions,
                                                :params true,
                                                :deps [:router :entitydb :jwt]},
-            :editor-form #:keechma.controller{:type :user/editor-form,
-                                              :params (page-eq? "editor"),
-                                              :deps [:router :article :jwt]},
+            :editor-form
+              #:keechma.controller{:type :user/editor-form,
+                                   :params (fn [{:keys [router]}]
+                                             (when (= "editor" (:page router))
+                                               (or (:slug router) :new))),
+                                   :deps [:router :article :jwt]},
             :comment-form
               #:keechma.controller{:type :user/comment-form,
                                    :params (fn [{:keys [router]}]

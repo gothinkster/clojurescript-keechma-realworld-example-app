@@ -6,7 +6,8 @@
             ["react" :as react]
             ["react-dom" :as rdom]
             [app.ui.components.inputs :refer [wrapped-input]]
-            [keechma.next.controllers.router :as router]))
+            [keechma.next.controllers.router :as router]
+            [app.ui.components.form-errors :refer [FormErrors]]))
 
 (defnc
   RegisterRenderer
@@ -23,6 +24,7 @@
           (d/p {:class "text-xs-center"}
                (d/a {:href (router/get-url props :router {:page "login"})}
                     "Have an account?"))
+          ($ FormErrors {:controller :register-form})
           (d/form
             {:on-submit (fn [e]
                           (.preventDefault e)

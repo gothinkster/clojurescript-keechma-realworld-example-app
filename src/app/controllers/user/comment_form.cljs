@@ -15,13 +15,16 @@
 (def pipelines
   {:keechma.form/submit-data
      (pipeline! [value {:keys [deps-state* meta-state*], :as ctrl}]
+                (pp/swap! meta-state* dissoc :submit-errors)
                 (let [jwt (:jwt @deps-state*)
                       slug (:keechma.controller/params ctrl)]
                   (api/comment-create {:jwt jwt,
                                        :article-slug slug,
                                        :comment (select-keys value [:body])}))
                 (ctrl/broadcast ctrl :comment/created value)
-                (pp/swap! meta-state* form/mount-form {}))})
+                (pp/swap! meta-state* form/mount-form {})
+                (rescue! [error]
+                         (pp/swap! meta-state* assoc :submit-errors error)))})
 
 (defmethod ctrl/prep :user/comment-form
   [ctrl]

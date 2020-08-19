@@ -40,24 +40,25 @@
   {:keechma.form/get-data
      (pipeline!
        [value {:keys [deps-state*], :as ctrl}]
-       (let [{:keys [jwt article router slug]} @deps-state*]
-         (when slug
-           (if (seq article)
-             (process-tag-list-in article)
-             (pipeline! [value ctrl]
-                        (dl/req ctrl
-                                :dataloader
-                                api/article-get
-                                {:article-slug (:slug router), :jwt jwt})
-                        (process-tag-list-in value)))))),
+       (let [slug (:keechma.controller/params ctrl)
+             {:keys [jwt article router]} @deps-state*]
+         (pipeline! [value ctrl]
+                    (if (= :new slug)
+                      {}
+                      (or article
+                          (dl/req ctrl
+                                  :dataloader
+                                  api/article-get
+                                  {:article-slug (:slug router), :jwt jwt})))
+                    (process-tag-list-in value)))),
    :keechma.form/submit-data
      (pipeline!
-       [value {:keys [deps-state*], :as ctrl}]
+       [value {:keys [meta-state* deps-state*], :as ctrl}]
+       (pp/swap! meta-state* dissoc :submit-errors)
        (store-article value (:jwt @deps-state*))
        (edb/insert-named! ctrl :entitydb :article :article/current value)
-       (router/redirect! ctrl
-                         :router
-                         {:page "article", :subpage (:slug value)}))})
+       (router/redirect! ctrl :router {:page "article", :subpage (:slug value)})
+       (rescue! [error] (pp/swap! meta-state* assoc :submit-errors error)))})
 
 (defmethod ctrl/prep :user/editor-form
   [ctrl]

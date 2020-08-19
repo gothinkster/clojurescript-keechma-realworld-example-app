@@ -15,8 +15,8 @@
   (when-let [app-instance @app-instance*] (keechma/stop! app-instance))
   (let [app-instance (keechma/start! app)]
     (rdom/render ($ react/StrictMode
-                   ($ KeechmaRoot {:keechma/app app-instance} ($ Main)))
-      (js/document.getElementById "app"))))
+                    ($ KeechmaRoot {:keechma/app app-instance} ($ Main)))
+                 (js/document.getElementById "app"))))
 
 (defn ^:dev/after-load reload
   "Render the toplevel component for this app."

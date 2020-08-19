@@ -17,7 +17,8 @@
                                      (:current-user @deps-state*)),
    :keechma.form/submit-data
      (pipeline!
-       [value {:keys [deps-state*], :as ctrl}]
+       [value {:keys [meta-state* deps-state*], :as ctrl}]
+       (pp/swap! meta-state* dissoc :submit-errors)
        (let [jwt (:jwt @deps-state*)
              user-data
                (if (seq (:password value)) value (dissoc value :password))]
@@ -25,7 +26,8 @@
        (edb/insert-named! ctrl :entitydb :user :user/current value)
        (router/redirect! ctrl
                          :router
-                         {:page "profile", :user (:username value)}))})
+                         {:page "profile", :user (:username value)})
+       (rescue! [error] (pp/swap! meta-state* assoc :submit-errors error)))})
 
 (defmethod ctrl/prep :user/settings-form
   [ctrl]

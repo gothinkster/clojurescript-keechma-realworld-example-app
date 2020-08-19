@@ -14,10 +14,12 @@
 (def pipelines
   {:keechma.form/submit-data
      (pipeline!
-       [value ctrl]
+       [value {:keys [meta-state*], :as ctrl}]
+       (pp/swap! meta-state* dissoc :submit-errors)
        (api/login value)
        (ctrl/broadcast ctrl :guest/login value)
-       (router/redirect! ctrl :router {:page "home", :subpage "personal"}))})
+       (router/redirect! ctrl :router {:page "home", :subpage "personal"})
+       (rescue! [error] (pp/swap! meta-state* assoc :submit-errors error)))})
 
 (defmethod ctrl/prep :guest/login-form
   [ctrl]

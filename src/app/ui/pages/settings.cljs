@@ -7,7 +7,8 @@
             ["react" :as react]
             ["react-dom" :as rdom]
             [app.ui.components.inputs :refer [wrapped-input]]
-            [keechma.next.controllers.router :as router]))
+            [keechma.next.controllers.router :as router]
+            [app.ui.components.form-errors :refer [FormErrors]]))
 
 (defnc
   SettingsRenderer
@@ -21,6 +22,7 @@
         (d/div
           {:class "col-md-6 offset-md-3 col-xs-12"}
           (d/h1 {:class "text-xs-center"} "Settings")
+          ($ FormErrors {:controller :settings-form})
           (d/form
             {:class "clearfix",
              :on-submit (fn [e]
