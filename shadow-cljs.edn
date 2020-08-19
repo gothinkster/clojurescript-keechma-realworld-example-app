@@ -1,0 +1,23 @@
+{:builds
+   {:app
+      {:asset-path "/js",
+       :devtools {},
+       :modules {:main {:init-fn app.core/main}},
+       :output-dir "public/js",
+       :target :browser},
+    :cards
+      {:asset-path "/js",
+       :compiler-options {:devcards true},
+       :modules {:main {:init-fn app.cards/main}},
+       :output-dir "public/js",
+       :target :browser},
+    :e2e {:ns-regexp "e2e.*", :output-to "out/e2e.js", :target :node-test},
+    :test-cards
+      {:ns-regexp "app.cards", :output-to "out/test.js", :target :node-test},
+    :tests
+      {:devtools {:http-port 8021, :http-root "public/js/test"},
+       :target :browser-test,
+       :test-dir "public/js/test"}},
+ :deps true,
+ :dev-http {3000 "public"},
+ :nrepl {:port 3333}}

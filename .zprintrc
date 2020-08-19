@@ -1,0 +1,6 @@
+{:style :community
+ :map {:comma? false
+       :force-nl? true}
+ :width 120
+ :fn-map {"defnc" [:arg2-pair {:vector {:wrap? false}}]
+          "pipeline!" [:fn {:vector {:wrap? false :force-nl? false}}]}}

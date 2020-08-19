@@ -23,3 +23,6 @@ Thumbs.db
 out
 /figwheel_server.log
 /checkouts
+.cpcache
+.shadow-cljs
+.iml
