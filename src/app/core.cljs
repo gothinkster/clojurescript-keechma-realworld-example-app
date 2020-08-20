@@ -14,6 +14,7 @@
   []
   (when-let [app-instance @app-instance*] (keechma/stop! app-instance))
   (let [app-instance (keechma/start! app)]
+    (reset! app-instance* app-instance)
     (rdom/render ($ react/StrictMode
                     ($ KeechmaRoot {:keechma/app app-instance} ($ Main)))
                  (js/document.getElementById "app"))))
