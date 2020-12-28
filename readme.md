@@ -4,6 +4,8 @@
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **Keechma/next** including CRUD operations, authentication, routing, pagination, and more.
 
+### [Demo](https://gothinkster.github.io/clojurescript-keechma-realworld-example-app/)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
+
 Keechma/classic app can be found in the `keechma-classic` branch.
 
 We've gone to great lengths to adhere to the **Keechma/next** community styleguides & best practices.
